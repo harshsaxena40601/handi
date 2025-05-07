@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="productdescription.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Irish+Grover&family=Jersey+25&family=Oregano:ital@0;1&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Product Details - SK HandiCraft</title>
+    <style>
+      /* Add styles for More Products section */
+      .more-products {
+        margin-top: 60px;
+      }
+
+      .more-products h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 24px;
+        position: relative;
+      }
+
+      .more-products h2:after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: #ff3b5c;
+        margin: 10px auto 0;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .product-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .product-card-content {
+        padding: 15px;
+      }
+
+      .product-card h3 {
+        margin: 0 0 10px;
+        font-size: 16px;
+      }
+
+      .product-card-price {
+        color: #ff3b5c;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .view-product-btn {
+        display: block;
+        text-align: center;
+        background-color: #ff3b5c;
+        color: white;
+        padding: 8px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: background-color 0.3s;
+      }
+
+      .view-product-btn:hover {
+        background-color: #e0344f;
+      }
+
+      /* Responsive design for product grid */
+      @media (max-width: 1024px) {
+        .products-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .products-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="left">
+        <div class="logo">
+          <img src="logo.png" alt="Company logo" />
+        </div>
+        <div class="company-name">
+          <h1>SK HandiCraft</h1>
+        </div>
+      </div>
+      <div class="right">
+        <div class="com-icons">
+          <form action="" class="search-form">
+            <div class="search">
+              <span
+                class="search-input fa-solid fa-magnifying-glass fa-xl"
+                style="color: #010000"
+              ></span>
+              <input
+                class="search-icon"
+                type="search"
+                placeholder="Search here ..."
+              />
+            </div>
+          </form>
+
+          <a href="productcart.html" class="cart-icon">
+            <i
+              class="fa-solid fa-bag-shopping fa-xl"
+              style="color: #07090d"
+            ></i>
+          </a>
+          <a href="login.html" class="user-icon">
+            <i class="fa-solid fa-user fa-xl" style="color: #100d0d"></i>
+          </a>
+
+          <div class="nav-menu">
+            <a href="cart.html">Shop</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+
+          <button class="mobile-menu-btn">
+            <i class="fa-solid fa-bars fa-xl"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-menu">
+      <a href="cart.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="newindex.html">FAQ</a>
+      <a href="newindex.html">Shipping</a>
+    </div>
+
+    <div class="product-container">
+      <div class="product-breadcrumb">
+        <a href="index.html">Home</a> > <a href="cart.html">Shop</a> >
+        <span>Handcrafted Floral Purse</span>
+      </div>
+
+      <div class="product-content">
+        <div class="product-gallery">
+          <img
+            src="product1.jpg"
+            alt="Handcrafted Floral Purse"
+            id="main-product-image"
+            class="main-image"
+          />
+          <div class="thumbnail-container">
+            <img
+              src="product1.jpg"
+              alt="Handcrafted Floral Purse - View 1"
+              class="thumbnail active"
+              onclick="changeImage('product1.jpg', this)"
+            />
+            <img
+              src="product2.jpg"
+              alt="Handcrafted Floral Purse - View 2"
+              class="thumbnail"
+              onclick="changeImage('product2.jpg', this)"
+            />
+            <img
+              src="product3.jpg"
+              alt="Handcrafted Floral Purse - View 3"
+              class="thumbnail"
+              onclick="changeImage('product3.jpg', this)"
+            />
+            <img
+              src="product4.jpg"
+              alt="Handcrafted Floral Purse - View 4"
+              class="thumbnail"
+              onclick="changeImage('product4.jpg', this)"
+            />
+          </div>
+        </div>
+
+        <div class="product-details">
+          <h1 class="product-title">Handcrafted Floral Purse</h1>
+          <div class="product-price">$49.99</div>
+
+          <div class="product-description">
+            <p>
+              This beautiful handcrafted floral purse is made with love and
+              attention to detail. Each piece is unique, featuring intricate
+              embroidery and high-quality materials that ensure both style and
+              durability. Perfect for adding a touch of elegance to any outfit
+              or as a thoughtful gift for someone special.
+            </p>
+          </div>
+
+          <div class="product-features">
+            <h3>Features:</h3>
+            <ul>
+              <li>Handmade with premium fabric</li>
+              <li>Unique floral embroidery design</li>
+              <li>Spacious interior with inner pocket</li>
+              <li>Adjustable shoulder strap</li>
+              <li>Secure zipper closure</li>
+              <li>Dimensions: 9" × 6" × 3"</li>
+            </ul>
+          </div>
+
+          <div class="quantity-selector">
+            <label for="quantity">Quantity:</label>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="1"
+              value="1"
+            />
+          </div>
+
+          <button class="add-to-cart-btn" onclick="addToCart()">
+            <i class="fa-solid fa-bag-shopping"></i> Add to Cart
+          </button>
+
+          <div class="shipping-info">
+            <h3>Shipping Information</h3>
+            <p>
+              Free shipping on orders over $75. Items typically ship within 1-2
+              business days. Each item is handmade with care, so please allow
+              slight variations from the pictures shown.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- More Products Section -->
+      <div class="more-products">
+        <h2>You May Also Like</h2>
+        <div class="products-grid">
+          <!-- Product 1 -->
+          <div class="product-card">
+            <img
+              src="/api/placeholder/400/320"
+              alt="Embroidered Table Runner"
+            />
+            <div class="product-card-content">
+              <h3>Embroidered Table Runner</h3>
+              <div class="product-card-price">$35.99</div>
+              <a href="product-table-runner.html" class="view-product-btn"
+                >View Product</a
+              >
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card">
+            <img src="/api/placeholder/400/320" alt="Handwoven Wall Hanging" />
+            <div class="product-card-content">
+              <h3>Handwoven Wall Hanging</h3>
+              <div class="product-card-price">$59.99</div>
+              <a href="product-wall-hanging.html" class="view-product-btn"
+                >View Product</a
+              >
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card">
+            <img src="/api/placeholder/400/320" alt="Decorative Pillow Cover" />
+            <div class="product-card-content">
+              <h3>Decorative Pillow Cover</h3>
+              <div class="product-card-price">$29.99</div>
+              <a href="product-pillow-cover.html" class="view-product-btn"
+                >View Product</a
+              >
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card">
+            <img
+              src="/api/placeholder/400/320"
+              alt="Hand-painted Ceramic Vase"
+            />
+            <div class="product-card-content">
+              <h3>Hand-painted Ceramic Vase</h3>
+              <div class="product-card-price">$42.99</div>
+              <a href="product-ceramic-vase.html" class="view-product-btn"
+                >View Product</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Function to change the main product image
+      function changeImage(src, thumbnail) {
+        document.getElementById("main-product-image").src = src;
+
+        // Remove active class from all thumbnails
+        const thumbnails = document.querySelectorAll(".thumbnail");
+        thumbnails.forEach((thumb) => {
+          thumb.classList.remove("active");
+        });
+
+        // Add active class to clicked thumbnail
+        thumbnail.classList.add("active");
+      }
+
+      // Function to add product to cart
+      function addToCart() {
+        const quantity = document.getElementById("quantity").value;
+        alert(`Added ${quantity} Handcrafted Floral Purse(s) to your cart!`);
+
+        // Here you would typically update the cart counter
+        // For demonstration, we'll just show an alert
+      }
+
+      // Mobile menu toggle
+      document
+        .querySelector(".mobile-menu-btn")
+        .addEventListener("click", function () {
+          document.querySelector(".mobile-menu").classList.toggle("active");
+        });
+    </script>
+  </body>
+</html>

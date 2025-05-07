@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="productcart.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Irish+Grover&family=Jersey+25&family=Oregano:ital@0;1&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Shopping Cart - SK HandiCraft</title>
+  </head>
+  <body>
+    <!-- Navigation Bar - Updated to match index.html -->
+    <nav>
+      <div class="left">
+        <div class="logo">
+          <img src="logo.png" alt="Company logo" />
+        </div>
+        <div class="company-name">
+          <h1>SK HandiCraft</h1>
+        </div>
+      </div>
+      <div class="right">
+        <div class="com-icons">
+          <form action="" class="search-form">
+            <div class="search">
+              <span
+                class="search-input fa-solid fa-magnifying-glass fa-xl"
+                style="color: #010000"
+              ></span>
+              <input
+                class="search-icon"
+                type="search"
+                placeholder="Search here ..."
+              />
+            </div>
+          </form>
+
+          <a href="productcart.html" class="cart-icon">
+            <i
+              class="fa-solid fa-bag-shopping fa-xl"
+              style="color: #07090d"
+            ></i>
+            <span class="badge">0</span>
+          </a>
+          <a href="login.html" class="user-icon">
+            <i class="fa-solid fa-user fa-xl" style="color: #100d0d"></i>
+          </a>
+
+          <div class="nav-menu">
+            <a href="cart.html">Shop</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+
+          <button class="mobile-menu-btn">
+            <i class="fa-solid fa-bars fa-xl"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-menu">
+      <a href="cart.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="newindex.html">FAQ</a>
+      <a href="newindex.html">Shipping</a>
+    </div>
+
+    <!-- Back Button -->
+    <a href="cart.html" class="back-button">
+      <i class="fa-solid fa-arrow-left"></i> Back to shopping
+    </a>
+
+    <!-- Cart Container -->
+    <div class="cart-container">
+      <div class="cart-header">
+        <h1>Your Shopping Cart</h1>
+        <p class="cart-subtitle">Review your items and proceed to checkout</p>
+      </div>
+
+      <!-- When items are in cart -->
+      <div class="cart-content">
+        <div class="cart-items-container">
+          <div class="cart-items-header">
+            <span class="item-col">Product</span>
+            <span class="price-col">Price</span>
+            <span class="quantity-col">Quantity</span>
+            <span class="total-col">Total</span>
+          </div>
+          <div class="cart-items">
+            <!-- Cart items will be dynamically loaded by JavaScript -->
+          </div>
+        </div>
+
+        <div class="cart-summary-container">
+          <div class="cart-summary">
+            <div class="summary-title">Order Summary</div>
+            <div class="summary-item">
+              <span class="summary-label">Items (0)</span>
+              <span class="summary-value">₹0.00</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Shipping</span>
+              <span class="summary-value">₹0.00</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Tax</span>
+              <span class="summary-value">₹0.00</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Discount</span>
+              <span class="summary-value">-₹0.00</span>
+            </div>
+            <div class="promo-code">
+              <input type="text" placeholder="Promo code" class="promo-input" />
+              <button class="apply-promo-btn">Apply</button>
+            </div>
+            <div class="total">
+              <span class="total-label">Total</span>
+              <span class="total-value">₹0.00</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+            <div class="payment-options">
+              <span>We accept:</span>
+              <div class="payment-icons">
+                <i class="fa-brands fa-cc-visa"></i>
+                <i class="fa-brands fa-cc-mastercard"></i>
+                <i class="fa-brands fa-cc-amex"></i>
+                <i class="fa-brands fa-cc-paypal"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Favorites Section -->
+      <div class="favorites-section">
+        <div class="favorites-header">
+          <div class="favorites-title">My Favorites</div>
+          <a href="#" class="view-all"
+            >View All <i class="fa-solid fa-arrow-right"></i
+          ></a>
+        </div>
+        <div class="favorites-grid">
+          <!-- Favorites will be dynamically loaded by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Empty Cart State (hidden by default) -->
+      <div class="cart-empty" style="display: none">
+        <i class="fa-solid fa-shopping-cart fa-3x"></i>
+        <h2>Your cart is empty</h2>
+        <p>Looks like you haven't added anything to your cart yet.</p>
+        <a href="cart.html" class="continue-shopping">Continue Shopping</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>SK HandiCraft</h3>
+          <p>
+            Handcrafted with love and precision. Bringing traditional artistry
+            to modern homes.
+          </p>
+          <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="cart.html">Shop</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <!-- <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li> -->
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul class="contact-info">
+            <li>
+              <i class="fa-solid fa-location-dot"></i> 123 Crafters Lane,
+              Artisan District
+            </li>
+            <li><i class="fa-solid fa-phone"></i> +91 98765 43210</li>
+            <li><i class="fa-solid fa-envelope"></i> info@skhandicraft.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 SK HandiCraft. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="productcart.js"></script>
+  </body>
+</html>

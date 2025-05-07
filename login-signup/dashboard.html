@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <script defer src="logout.js"></script>
+  </head>
+  <body>
+    <!-- Back Button -->
+    <div class="back-button">
+      <a href="index.html"> <i class="fas fa-arrow-left"></i> Back to Home </a>
+    </div>
+
+    <div class="container dashboard-container">
+      <div class="user-header">
+        <h1 class="dashboard-title">User Dashboard</h1>
+        <div id="userDisplay" class="user-greeting">Welcome!</div>
+      </div>
+
+      <div class="dashboard-content">
+        <div class="dashboard-section">
+          <h2><i class="fas fa-user-circle"></i> My Profile</h2>
+          <p>View and update your personal information.</p>
+        </div>
+
+        <div class="dashboard-section">
+          <h2><i class="fas fa-cog"></i> Account Settings</h2>
+          <p>Manage your account preferences and security settings.</p>
+        </div>
+
+        <div class="dashboard-section">
+          <h2><i class="fas fa-bell"></i> Notifications</h2>
+          <p>Control how and when you receive updates.</p>
+        </div>
+      </div>
+
+      <div class="logout-container">
+        <button id="logoutBtn" class="logout-btn">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

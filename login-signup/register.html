@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration</title>
+    <link rel="stylesheet" href="login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <script defer src="register.js"></script>
+  </head>
+  <body>
+    <!-- Back Button -->
+    <div class="back-button">
+      <a href="index.html"> <i class="fas fa-arrow-left"></i> Back to Home </a>
+    </div>
+
+    <div class="container">
+      <div id="registration">
+        <h1 class="form-title">Create an Account</h1>
+        <form id="registrationForm">
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input
+              type="text"
+              id="firstName"
+              placeholder="First Name"
+              required
+            />
+            <label for="firstName">First Name</label>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" id="lastName" placeholder="Last Name" required />
+            <label for="lastName">Last Name</label>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="email" placeholder="Email" required />
+            <label for="email">Email</label>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              required
+            />
+            <label for="password">Password</label>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="Confirm Password"
+              required
+            />
+            <label for="confirmPassword">Confirm Password</label>
+          </div>
+          <input type="submit" value="Register" class="btn" />
+        </form>
+        <div class="links">
+          <a href="login.html">Already have an account? Sign In</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
