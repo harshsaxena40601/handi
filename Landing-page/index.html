@@ -46,7 +46,7 @@
             </div>
           </form>
 
-          <a href="productcart.html" class="cart-icon">
+          <a href="/checkoutCart/productcart.html" class="cart-icon">
             <i
               class="fa-solid fa-bag-shopping fa-xl"
               style="color: #07090d"
@@ -171,107 +171,12 @@
     </section>
 
     <!-- Featured Products -->
-    <!-- Update to Featured Products Section in index.html -->
     <section class="featured-products">
       <div class="container">
         <h2 class="section-title">Featured Products</h2>
+        <!-- Empty product grid that will be populated by JavaScript -->
         <div class="product-grid">
-          <div class="product-card">
-            <div class="product-img">
-              <a
-                href="/product-description/productdescription.html?product=rattan-basket"
-              >
-                <img
-                  src="/api/placeholder/400/300"
-                  alt="Handwoven Rattan Basket"
-                />
-              </a>
-            </div>
-            <div class="product-info">
-              <h3>
-                <a
-                  href="/product-description/productdescription.html?product=rattan-basket"
-                  >Handwoven Rattan Basket</a
-                >
-              </h3>
-              <p>
-                Handcrafted by skilled artisans using traditional techniques.
-              </p>
-              <span class="product-price">₹1,599</span>
-              <button class="add-to-cart">Add to Cart</button>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="product-img">
-              <a
-                href="/product-description/productdescription.html?product=ceramic-vase"
-              >
-                <img src="/api/placeholder/400/300" alt="Ceramic Vase" />
-              </a>
-            </div>
-            <div class="product-info">
-              <h3>
-                <a
-                  href="/product-description/productdescription.html?product=ceramic-vase"
-                  >Handmade Ceramic Vase</a
-                >
-              </h3>
-              <p>
-                Each piece is unique with natural variations in glaze and
-                texture.
-              </p>
-              <span class="product-price">₹1,199</span>
-              <button class="add-to-cart">Add to Cart</button>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="product-img">
-              <a
-                href="/product-description/productdescription.html?product=cushion-cover"
-              >
-                <img
-                  src="/api/placeholder/400/300"
-                  alt="Hand-embroidered Cushion Cover"
-                />
-              </a>
-            </div>
-            <div class="product-info">
-              <h3>
-                <a
-                  href="/product-description/productdescription.html?product=cushion-cover"
-                  >Embroidered Cushion Cover</a
-                >
-              </h3>
-              <p>
-                Featuring intricate hand embroidery on natural cotton fabric.
-              </p>
-              <span class="product-price">₹899</span>
-              <button class="add-to-cart">Add to Cart</button>
-            </div>
-          </div>
-          <div class="product-card">
-            <div class="product-img">
-              <a
-                href="/product-description/productdescription.html?product=wooden-bowl"
-              >
-                <img src="/api/placeholder/400/300" alt="Carved Wooden Bowl" />
-              </a>
-            </div>
-            <div class="product-info">
-              <h3>
-                <a
-                  href="/product-description/productdescription.html?product=wooden-bowl"
-                  >Carved Wooden Bowl</a
-                >
-              </h3>
-              <p>
-                Meticulously carved from sustainable hardwood by master
-                craftsmen.
-              </p>
-              <span class="product-price">₹2,199</span>
-              <button class="add-to-cart">Add to Cart</button>
-            </div>
-          </div>
+          <!-- Products will be dynamically inserted here from the backend -->
         </div>
       </div>
     </section>
@@ -424,5 +329,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="cart.js"></script>
   </body>
 </html>

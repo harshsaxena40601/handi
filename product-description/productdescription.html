@@ -113,13 +113,30 @@
           grid-template-columns: 1fr;
         }
       }
+
+      /* Add style for badge */
+      .badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: #ff3b5c;
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
     <nav>
       <div class="left">
         <div class="logo">
-          <img src="logo.png" alt="Company logo" />
+          <img src="/Media/logo.png" alt="Company logo" />
         </div>
         <div class="company-name">
           <h1>SK HandiCraft</h1>
@@ -141,11 +158,16 @@
             </div>
           </form>
 
-          <a href="productcart.html" class="cart-icon">
+          <a
+            href="/checkoutCart/productcart.html"
+            class="cart-icon"
+            style="position: relative"
+          >
             <i
               class="fa-solid fa-bag-shopping fa-xl"
               style="color: #07090d"
             ></i>
+            <span class="badge" style="display: none">0</span>
           </a>
           <a href="login.html" class="user-icon">
             <i class="fa-solid fa-user fa-xl" style="color: #100d0d"></i>
@@ -328,36 +350,13 @@
       </div>
     </div>
 
+    <!-- Important: First load cart.js, then script.js -->
+    <script src="/Landing-page/cart.js"></script>
+    <script src="script.js"></script>
+
     <script>
-      // Function to change the main product image
-      function changeImage(src, thumbnail) {
-        document.getElementById("main-product-image").src = src;
-
-        // Remove active class from all thumbnails
-        const thumbnails = document.querySelectorAll(".thumbnail");
-        thumbnails.forEach((thumb) => {
-          thumb.classList.remove("active");
-        });
-
-        // Add active class to clicked thumbnail
-        thumbnail.classList.add("active");
-      }
-
-      // Function to add product to cart
-      function addToCart() {
-        const quantity = document.getElementById("quantity").value;
-        alert(`Added ${quantity} Handcrafted Floral Purse(s) to your cart!`);
-
-        // Here you would typically update the cart counter
-        // For demonstration, we'll just show an alert
-      }
-
-      // Mobile menu toggle
-      document
-        .querySelector(".mobile-menu-btn")
-        .addEventListener("click", function () {
-          document.querySelector(".mobile-menu").classList.toggle("active");
-        });
+      // This code has been moved to script.js
+      // The addToCart function is now handled properly with integration to cart.js
     </script>
   </body>
 </html>

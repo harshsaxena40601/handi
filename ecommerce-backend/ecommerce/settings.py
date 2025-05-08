@@ -60,11 +60,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
         
 ] 
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5500",  # Your frontend server
-    "http://localhost:5500",
-    "http://localhost:8000",  # Django server (if testing locally)
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://127.0.0.1:5500",  # Your frontend server
+#     "http://localhost:5500",
+#     "http://localhost:8000",  # Django server (if testing locally)
+# ]
+CORS_ALLOW_ALL_ORIGINS = True 
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'ecommerce.urls'
