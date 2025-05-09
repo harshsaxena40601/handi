@@ -1,121 +1,152 @@
-// Cart functionality
+// Global cart variable
 let cart = [];
-let isCartInitialized = false; // Flag to prevent multiple initializations
 
-// Load cart from localStorage on page load
+// Load cart from localStorage
 function loadCart() {
-  // Check if cart has already been initialized to prevent duplicate loading
-  if (isCartInitialized) return;
-
+  console.log("Loading cart from local storage");
   try {
     const savedCart = localStorage.getItem("cart");
-    if (savedCart) {
-      cart = JSON.parse(savedCart);
-      updateCartCounter();
-    }
-    isCartInitialized = true;
+    cart = savedCart ? JSON.parse(savedCart) : [];
+    updateCartBadge();
+    console.log("Cart loaded:", cart);
   } catch (error) {
-    console.error("Error loading cart from localStorage:", error);
-    // Reset cart if there's an error parsing the saved cart
+    console.error("Error loading cart:", error);
     cart = [];
-    localStorage.removeItem("cart");
   }
 }
 
 // Save cart to localStorage
 function saveCart() {
-  localStorage.setItem("cart", JSON.stringify(cart));
+  try {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    console.log("Cart saved to localStorage:", cart);
+  } catch (error) {
+    console.error("Error saving cart:", error);
+  }
 }
 
 // Add item to cart
 function addItemToCart(id, name, price, quantity, imageUrl) {
-  // Validate inputs before adding to cart
-  if (!id || !name || isNaN(parseFloat(price)) || quantity <= 0) {
-    console.error("Invalid product data:", { id, name, price, quantity });
-    return;
-  }
+  console.log("Adding to cart:", id, name, price, quantity);
 
-  // Check if product already exists in cart
+  // Check if item already exists in cart
   const existingItem = cart.find((item) => item.id === id);
 
   if (existingItem) {
-    // Update quantity if product already exists
-    existingItem.quantity += quantity;
+    // Update existing item quantity
+    existingItem.quantity += parseInt(quantity);
+    console.log("Updated existing item quantity:", existingItem);
   } else {
     // Add new item to cart
     cart.push({
       id: id,
       name: name,
       price: parseFloat(price),
-      quantity: quantity,
+      quantity: parseInt(quantity),
       imageUrl: imageUrl,
     });
+    console.log("Added new item to cart:", cart[cart.length - 1]);
   }
 
-  // Save to localStorage and update UI
+  // Save cart to localStorage
   saveCart();
-  updateCartCounter();
 
-  console.log("Cart updated:", cart); // For debugging
+  // Update cart badge
+  updateCartBadge();
+
+  return true;
+}
+
+// Update cart badge with current number of items
+function updateCartBadge() {
+  const cartBadge = document.querySelector(".badge");
+  if (cartBadge) {
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+    cartBadge.textContent = totalItems;
+    console.log("Cart badge updated:", totalItems);
+  }
 }
 
 // Remove item from cart
 function removeItemFromCart(id) {
+  console.log("Removing item from cart:", id);
   cart = cart.filter((item) => item.id !== id);
   saveCart();
-  updateCartCounter();
+  updateCartBadge();
 }
 
-// Update quantity of item in cart
+// Update cart item quantity
 function updateCartItemQuantity(id, quantity) {
+  console.log("Updating quantity for item:", id, "to", quantity);
   const item = cart.find((item) => item.id === id);
   if (item) {
-    item.quantity = quantity;
-    if (item.quantity <= 0) {
-      removeItemFromCart(id);
-    } else {
-      saveCart();
-      updateCartCounter();
-    }
+    item.quantity = parseInt(quantity);
+    saveCart();
+    updateCartBadge();
   }
 }
 
-// Get cart total (number of items)
-function getCartItemCount() {
-  return cart.reduce((total, item) => total + item.quantity, 0);
+// Debug function to see cart contents
+function debugCart() {
+  console.log("Current cart contents:", cart);
+  console.log("Cart JSON:", JSON.stringify(cart, null, 2));
+  alert("Cart contents logged to console");
 }
 
-// Get cart total price
-function getCartTotal() {
-  return cart.reduce((total, item) => total + item.price * item.quantity, 0);
-}
-
-// Update the cart counter in the UI
-function updateCartCounter() {
-  const counter = document.querySelector(".badge");
-  if (counter) {
-    const itemCount = getCartItemCount();
-    counter.textContent = itemCount;
-
-    // Optionally hide the badge when cart is empty
-    if (itemCount === 0) {
-      counter.style.display = "none";
-    } else {
-      counter.style.display = "flex";
-    }
-  }
-}
-
-// Clear the entire cart
-function clearCart() {
-  cart = [];
-  saveCart();
-  updateCartCounter();
-}
-
-// Initialize cart on page load - with safeguards to prevent multiple initializations
+// Initialize cart on script load
 document.addEventListener("DOMContentLoaded", function () {
-  if (!isCartInitialized) {
-    loadCart();
-  }
+  console.log("Cart.js loaded");
+  loadCart();
 });
+
+// Show confirmation message when item is added to cart
+function showAddToCartConfirmation(productName) {
+  console.log("Showing confirmation for adding:", productName);
+
+  // Remove any existing confirmation
+  const existingConfirmation = document.querySelector(
+    ".add-to-cart-confirmation"
+  );
+  if (existingConfirmation) {
+    existingConfirmation.remove();
+  }
+
+  // Create confirmation element
+  const confirmation = document.createElement("div");
+  confirmation.classList.add("add-to-cart-confirmation");
+  confirmation.innerHTML = `<p>Added ${productName} to cart!</p>`;
+
+  // Add to DOM
+  document.body.appendChild(confirmation);
+
+  // Remove after 2 seconds
+  setTimeout(() => {
+    confirmation.remove();
+  }, 2000);
+
+  // Add styles if they don't exist
+  if (!document.querySelector(".cart-confirmation-style")) {
+    const style = document.createElement("style");
+    style.classList.add("cart-confirmation-style");
+    style.textContent = `
+      .add-to-cart-confirmation {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 4px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        z-index: 1000;
+        animation: slideIn 0.3s ease-out;
+      }
+      
+      @keyframes slideIn {
+        from { transform: translateY(100px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}

@@ -30,7 +30,7 @@ async function loadProductDetails() {
     const productId = getUrlParameter("product");
 
     if (!productId) {
-      console.error("No product ID specified in URL");
+      console.log("No product ID specified in URL");
       // Use the default product if no ID is specified
       window.currentProduct = {
         id: "floral-purse",
@@ -214,11 +214,22 @@ function displayRecommendedProducts(products, currentProductId) {
       const price = this.getAttribute("data-price");
       const imageUrl = this.getAttribute("data-image");
 
+      // Check if cart functions are available
+      if (typeof addItemToCart !== "function") {
+        console.error(
+          "Cart functions not available. Make sure cart.js is loaded first"
+        );
+        alert(
+          "Unable to add item to cart. Please refresh the page and try again."
+        );
+        return;
+      }
+
       // Add item to cart (quantity 1 for quick add from recommendations)
       addItemToCart(productId, productName, price, 1, imageUrl);
 
       // Show confirmation
-      alert(`Added ${productName} to your cart!`);
+      showAddToCartConfirmation(productName);
     });
   });
 }
@@ -286,23 +297,67 @@ function changeImage(src, thumbnail) {
 
 // Function to add product to cart - using cart.js functionality
 function addToCart() {
-  if (!window.currentProduct) {
-    console.error("Product details not loaded properly");
-    return;
+  console.log("Add to cart function called");
+
+  // First check if cart functions are available
+  if (typeof addItemToCart !== "function") {
+    console.error(
+      "addItemToCart function not found! Make sure cart.js is loaded properly."
+    );
+    alert("Unable to add item to cart. Please refresh the page and try again.");
+    return false;
   }
 
-  const quantity = parseInt(document.getElementById("quantity").value);
+  if (!window.currentProduct) {
+    console.error("Product details not loaded properly");
+    return false;
+  }
+
+  const quantityInput = document.getElementById("quantity");
+  if (!quantityInput) {
+    console.error("Quantity input not found");
+    return false;
+  }
+
+  const quantity = parseInt(quantityInput.value) || 1;
   const { id, name, price, image } = window.currentProduct;
 
-  // Add to cart using the shared cart.js functionality
-  addItemToCart(id, name, price, quantity, image);
+  console.log("Adding product to cart:", { id, name, price, quantity, image });
 
-  // Show confirmation
-  alert(`Added ${quantity} ${name}(s) to your cart!`);
+  // Add to cart using the shared cart.js functionality
+  const added = addItemToCart(id, name, price, quantity, image);
+
+  if (added) {
+    // Show confirmation
+    showAddToCartConfirmation(name);
+    return true;
+  }
+
+  return false;
 }
 
 // Initialize when the page loads
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("Product description page initialized");
+
+  // Check if cart.js functions are available - this is important!
+  if (typeof loadCart !== "function") {
+    console.error(
+      "loadCart function not found. Make sure cart.js is loaded before script.js"
+    );
+    // Add an error message to the page
+    const errorMsg = document.createElement("div");
+    errorMsg.className = "error-message";
+    errorMsg.innerHTML = `
+      <p><strong>Error:</strong> Cart functionality not available.</p>
+      <p>Please make sure all scripts are properly loaded.</p>
+    `;
+    document.body.prepend(errorMsg);
+  } else {
+    // Initialize cart
+    loadCart();
+  }
+
   // Load product details
   loadProductDetails();
 
@@ -314,35 +369,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Add to cart button event
+  // Add event listener for Add to Cart button
   const addToCartBtn = document.querySelector(".add-to-cart-btn");
   if (addToCartBtn) {
-    addToCartBtn.addEventListener("click", addToCart);
+    // Remove any existing event listeners by cloning and replacing
+    const newButton = addToCartBtn.cloneNode(true);
+    addToCartBtn.parentNode.replaceChild(newButton, addToCartBtn);
+
+    // Add event listener to the fresh button
+    newButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log("Add to cart button clicked");
+      addToCart();
+    });
+  } else {
+    console.error("Add to cart button not found");
   }
-
-  // Add CSS for the recommended product add to cart button
-  const style = document.createElement("style");
-  style.textContent = `
-    .add-to-cart-recommended {
-      display: block;
-      width: 100%;
-      background-color: #ff3b5c;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 8px;
-      margin-top: 10px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background-color 0.3s;
-    }
-    
-    .add-to-cart-recommended:hover {
-      background-color: #e0344f;
-    }
-  `;
-  document.head.appendChild(style);
-
-  // Initialize cart
-  loadCart();
 });

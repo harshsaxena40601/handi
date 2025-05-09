@@ -20,7 +20,7 @@
     <title>Shopping Cart - SK HandiCraft</title>
   </head>
   <body>
-    <!-- Navigation Bar - Updated to match index.html -->
+    <!-- Navigation Bar -->
     <nav>
       <div class="left">
         <div class="logo">
@@ -99,63 +99,42 @@
             <span class="price-col">Price</span>
             <span class="quantity-col">Quantity</span>
             <span class="total-col">Total</span>
+            <span class="actions-col">Actions</span>
           </div>
           <div class="cart-items">
             <!-- Cart items will be dynamically loaded by JavaScript -->
           </div>
         </div>
-
         <div class="cart-summary-container">
           <div class="cart-summary">
-            <div class="summary-title">Order Summary</div>
+            <h3 class="summary-title">Order Summary</h3>
             <div class="summary-item">
-              <span class="summary-label">Items (0)</span>
-              <span class="summary-value">₹0.00</span>
+              <span class="summary-label" id="summary-items">Items (0)</span>
+              <span class="summary-value" id="summary-subtotal">₹0.00</span>
             </div>
             <div class="summary-item">
               <span class="summary-label">Shipping</span>
-              <span class="summary-value">₹0.00</span>
+              <span class="summary-value" id="summary-shipping">₹0.00</span>
             </div>
             <div class="summary-item">
               <span class="summary-label">Tax</span>
-              <span class="summary-value">₹0.00</span>
-            </div>
-            <div class="summary-item">
-              <span class="summary-label">Discount</span>
-              <span class="summary-value">-₹0.00</span>
-            </div>
-            <div class="promo-code">
-              <input type="text" placeholder="Promo code" class="promo-input" />
-              <button class="apply-promo-btn">Apply</button>
+              <span class="summary-value" id="summary-tax">₹0.00</span>
             </div>
             <div class="total">
               <span class="total-label">Total</span>
-              <span class="total-value">₹0.00</span>
+              <span class="total-value" id="summary-total">₹0.00</span>
             </div>
             <button class="checkout-btn">Proceed to Checkout</button>
             <div class="payment-options">
-              <span>We accept:</span>
+              <p>Secure Payment Options</p>
               <div class="payment-icons">
                 <i class="fa-brands fa-cc-visa"></i>
                 <i class="fa-brands fa-cc-mastercard"></i>
-                <i class="fa-brands fa-cc-amex"></i>
                 <i class="fa-brands fa-cc-paypal"></i>
+                <i class="fa-brands fa-cc-apple-pay"></i>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- Favorites Section -->
-      <div class="favorites-section">
-        <div class="favorites-header">
-          <div class="favorites-title">My Favorites</div>
-          <a href="#" class="view-all"
-            >View All <i class="fa-solid fa-arrow-right"></i
-          ></a>
-        </div>
-        <div class="favorites-grid">
-          <!-- Favorites will be dynamically loaded by JavaScript -->
         </div>
       </div>
 
@@ -190,8 +169,6 @@
             <li><a href="cart.html">Shop</a></li>
             <li><a href="about.html">About Us</a></li>
             <li><a href="contact.html">Contact</a></li>
-            <!-- <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li> -->
           </ul>
         </div>
         <div class="footer-column">
@@ -211,6 +188,7 @@
       </div>
     </footer>
 
+    <!-- Only include one JavaScript file to avoid conflicts -->
     <script src="productcart.js"></script>
   </body>
 </html>
