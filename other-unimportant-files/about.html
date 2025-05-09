@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Irish+Grover&family=Jersey+25&family=Oregano:ital@0;1&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Oregano", cursive;
+        color: #333;
+        background-color: #f8f8f8;
+        line-height: 1.6;
+      }
+
+      .about-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 20px;
+      }
+
+      .about-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .about-header h1 {
+        font-family: "Dancing Script", cursive;
+        font-size: 52px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #333;
+        position: relative;
+        display: inline-block;
+      }
+
+      .about-header h1:after {
+        content: "";
+        position: absolute;
+        width: 60px;
+        height: 3px;
+        background-color: #4a90e2;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .about-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .about-text {
+        flex: 1;
+        min-width: 300px;
+      }
+
+      .about-text p {
+        font-size: 20px;
+        margin-bottom: 25px;
+        line-height: 1.8;
+      }
+
+      .about-gallery {
+        flex: 1;
+        min-width: 300px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 15px;
+        height: 500px;
+      }
+
+      .gallery-item {
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.03);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .item-1 {
+        grid-column: 1 / 2;
+        grid-row: 1 / 3;
+      }
+
+      .item-2 {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+      }
+
+      .item-3 {
+        grid-column: 3 / 4;
+        grid-row: 1 / 2;
+      }
+
+      .item-4 {
+        grid-column: 2 / 4;
+        grid-row: 2 / 3;
+      }
+
+      .item-5 {
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
+      }
+
+      .item-6 {
+        grid-column: 2 / 3;
+        grid-row: 3 / 4;
+      }
+
+      .item-7 {
+        grid-column: 3 / 4;
+        grid-row: 3 / 4;
+      }
+
+      .values-section {
+        margin-top: 80px;
+        text-align: center;
+      }
+
+      .values-section h2 {
+        font-family: "Irish Grover", serif;
+        font-size: 38px;
+        margin-bottom: 40px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .values-section h2:after {
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 3px;
+        background-color: #4a90e2;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .values-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+      }
+
+      .value-card {
+        flex: 0 1 300px;
+        padding: 30px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease;
+      }
+
+      .value-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .value-card h3 {
+        font-family: "Jersey 25", sans-serif;
+        font-size: 24px;
+        margin-bottom: 15px;
+        color: #4a90e2;
+      }
+
+      .value-card p {
+        font-family: "Oregano", cursive;
+        font-size: 18px;
+        color: #666;
+      }
+
+      .btn {
+        border: none;
+        padding: 14px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        font-family: "Irish Grover", serif;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-secondary {
+        background-color: #e2e8f0;
+        color: #4a5568;
+        margin-bottom: 20px;
+      }
+
+      .btn-secondary:hover {
+        background-color: #cbd5e0;
+      }
+
+      @media (max-width: 768px) {
+        .about-content {
+          flex-direction: column;
+        }
+
+        .about-gallery {
+          height: 400px;
+        }
+
+        .values-grid {
+          gap: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="about-container">
+      <a href="#" class="btn btn-secondary" onclick="goBack()">← Back</a>
+
+      <div class="about-header">
+        <h1>About Us</h1>
+      </div>
+
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            We are a team of experienced and talented individuals who are
+            passionate about creating unique, handcrafted items. Our goal is to
+            provide our customers with high-quality products that are both
+            beautiful and functional.
+          </p>
+          <p>
+            We take pride in our work and are dedicated to delivering
+            exceptional customer service. Whether you are looking for a special
+            gift or something to add a touch of elegance to your home, we have
+            something for everyone.
+          </p>
+          <p>Thank you for supporting our small business!</p>
+        </div>
+
+        <div class="about-gallery">
+          <div class="gallery-item item-1">
+            <img src="./photos/a1.jpg" alt="Our workshop" />
+          </div>
+          <div class="gallery-item item-2">
+            <img src="a2.jpg" alt="Handcrafted item" />
+          </div>
+          <div class="gallery-item item-3">
+            <img src="a3.jpg" alt="Team member" />
+          </div>
+          <div class="gallery-item item-4">
+            <img src="a4.jpg" alt="Creative process" />
+          </div>
+          <div class="gallery-item item-5">
+            <img src="a6.jpg" alt="Materials" />
+          </div>
+          <div class="gallery-item item-6">
+            <img src="a7.jpg" alt="Finished product" />
+          </div>
+          <div class="gallery-item item-7">
+            <img src="a2.jpg" alt="Customer showcase" />
+          </div>
+        </div>
+      </div>
+
+      <div class="values-section">
+        <h2>Our Values</h2>
+        <div class="values-grid">
+          <div class="value-card">
+            <h3>Quality</h3>
+            <p>
+              We use only the finest materials and techniques to ensure our
+              products meet the highest standards of craftsmanship.
+            </p>
+          </div>
+          <div class="value-card">
+            <h3>Creativity</h3>
+            <p>
+              Each piece we create is unique, reflecting our commitment to
+              innovation and artistic expression.
+            </p>
+          </div>
+          <div class="value-card">
+            <h3>Sustainability</h3>
+            <p>
+              We are dedicated to environmentally friendly practices and
+              responsibly sourced materials.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function goBack() {
+        window.history.back();
+        // Prevent default behavior if this is just a demo
+        return false;
+      }
+    </script>
+  </body>
+</html>

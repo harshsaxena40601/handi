@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Irish+Grover&family=Jersey+25&family=Oregano:ital@0;1&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Oregano", cursive;
+        line-height: 1.6;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+        background-color: #f9fafb;
+      }
+
+      .container {
+        background-color: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      h1 {
+        font-family: "Dancing Script", cursive;
+        color: #1a365d;
+        margin-bottom: 10px;
+        font-weight: 700;
+        font-size: 42px;
+      }
+
+      .subtitle {
+        color: #718096;
+        margin-bottom: 30px;
+        font-size: 18px;
+      }
+
+      .form-group {
+        margin-bottom: 24px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #4a5568;
+        font-size: 16px;
+        font-family: "Jersey 25", sans-serif;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 16px;
+        font-family: "Oregano", cursive;
+        transition: all 0.2s ease;
+        box-sizing: border-box;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #3182ce;
+        box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+      }
+
+      textarea {
+        height: 150px;
+        resize: vertical;
+      }
+
+      .btn {
+        border: none;
+        padding: 14px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        font-family: "Irish Grover", serif;
+      }
+
+      .btn-primary {
+        background-color: #3182ce;
+        color: white;
+        width: 100%;
+      }
+
+      .btn-primary:hover {
+        background-color: #2c5282;
+        transform: translateY(-1px);
+      }
+
+      .btn-secondary {
+        background-color: #e2e8f0;
+        color: #4a5568;
+        display: inline-block;
+        text-decoration: none;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .btn-secondary:hover {
+        background-color: #cbd5e0;
+      }
+
+      .required {
+        color: #e53e3e;
+        margin-left: 3px;
+      }
+
+      .form-footer {
+        margin-top: 30px;
+        font-size: 16px;
+        color: #718096;
+        text-align: center;
+      }
+
+      .input-icon {
+        position: relative;
+      }
+
+      .input-icon input,
+      .input-icon select {
+        padding-left: 40px;
+      }
+
+      .icon {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #a0aec0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="#" class="btn btn-secondary" onclick="goBack()">← Back</a>
+
+      <h1>Contact Us</h1>
+      <p class="subtitle">
+        We'd love to hear from you. Please fill out the form below.
+      </p>
+
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Name<span class="required">*</span></label>
+          <div class="input-icon">
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Your full name"
+              required
+            />
+            <div class="icon">👤</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email"
+            >Email Address<span class="required">*</span></label
+          >
+          <div class="input-icon">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="your.email@example.com"
+              required
+            />
+            <div class="icon">✉️</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <div class="input-icon">
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="(123) 456-7890"
+            />
+            <div class="icon">📱</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject<span class="required">*</span></label>
+          <div class="input-icon">
+            <select id="subject" name="subject" required>
+              <option value="">Please select a subject</option>
+              <option value="general">General Inquiry</option>
+              <option value="support">Technical Support</option>
+              <option value="billing">Billing Question</option>
+              <option value="feedback">Feedback</option>
+              <option value="other">Other</option>
+            </select>
+            <div class="icon">📝</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message<span class="required">*</span></label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="How can we help you?"
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+
+      <div class="form-footer">
+        <p>Fields marked with <span class="required">*</span> are required.</p>
+        <p>
+          We respect your privacy. Your information will not be shared with any
+          third party.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // In a real application, you would send the form data to your server here
+          alert("Thank you for your message! We will contact you soon.");
+          this.reset();
+        });
+
+      function goBack() {
+        window.history.back();
+        // Prevent default behavior if this is just a demo
+        return false;
+      }
+    </script>
+  </body>
+</html>
