@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SK HandiCraft - Handcrafted Treasures</title>
+    <link rel="stylesheet" href="/Landing-page/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Irish+Grover&family=Jersey+25&family=Oregano:ital@0;1&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation Bar - Matched with productcart.html -->
+    <nav>
+      <div class="left">
+        <div class="logo">
+          <img src="/Media/logo.png" alt="Company logo" />
+        </div>
+        <div class="company-name">
+          <h1>SK HandiCraft</h1>
+        </div>
+      </div>
+      <div class="right">
+        <div class="com-icons">
+          <form action="" class="search-form">
+            <div class="search">
+              <span
+                class="search-input fa-solid fa-magnifying-glass fa-xl"
+                style="color: #010000"
+              ></span>
+              <input
+                class="search-icon"
+                type="search"
+                placeholder="Search here ..."
+              />
+            </div>
+          </form>
+
+          <a href="/checkoutCart/productcart.html" class="cart-icon">
+            <i
+              class="fa-solid fa-bag-shopping fa-xl"
+              style="color: #07090d"
+            ></i>
+            <span class="badge">3</span>
+          </a>
+          <a href="/login-signup/login.html" class="user-icon">
+            <i class="fa-solid fa-user fa-xl" style="color: #100d0d"></i>
+          </a>
+
+          <div class="nav-menu">
+            <!-- <a href="#">Home</a> -->
+            <!-- <a href="/cart.html">Shop</a> -->
+            <a href="/other-unimportant-files/about.html">About</a>
+            <a href="/other-unimportant-files/contact.html">Contact</a>
+          </div>
+
+          <button class="mobile-menu-btn">
+            <i class="fa-solid fa-bars fa-xl"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-menu">
+      <a href="index.html">Home</a>
+      <a href="cart.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="newindex.html">FAQ</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <h1>Handcrafted Treasures</h1>
+        <p>
+          Discover unique artisan products made with love and passion. Each
+          piece tells a story and brings a touch of authenticity to your home.
+        </p>
+        <a href="cart.html" class="cta-button">Shop Now</a>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <!-- Updated Categories Section with links -->
+    <section class="categories">
+      <div class="container">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="category-grid">
+          <div class="category-card">
+            <div class="category-img">
+              <a
+                href="/product-description/productdescription.html?product=rattan-basket"
+              >
+                <img src="/api/placeholder/400/200" alt="Handwoven Baskets" />
+              </a>
+            </div>
+            <div class="category-info">
+              <h3>Handwoven Baskets</h3>
+              <a
+                href="/product-description/productdescription.html?product=rattan-basket"
+                class="cta-button"
+                >Explore</a
+              >
+            </div>
+          </div>
+          <div class="category-card">
+            <div class="category-img">
+              <a
+                href="/product-description/productdescription.html?product=ceramic-vase"
+              >
+                <img src="/api/placeholder/400/200" alt="Ceramic Pottery" />
+              </a>
+            </div>
+            <div class="category-info">
+              <h3>Ceramic Pottery</h3>
+              <a
+                href="/product-description/productdescription.html?product=ceramic-vase"
+                class="cta-button"
+                >Explore</a
+              >
+            </div>
+          </div>
+          <div class="category-card">
+            <div class="category-img">
+              <a
+                href="/product-description/productdescription.html?product=cushion-cover"
+              >
+                <img src="/api/placeholder/400/200" alt="Textile Art" />
+              </a>
+            </div>
+            <div class="category-info">
+              <h3>Textile Art</h3>
+              <a
+                href="/product-description/productdescription.html?product=cushion-cover"
+                class="cta-button"
+                >Explore</a
+              >
+            </div>
+          </div>
+          <div class="category-card">
+            <div class="category-img">
+              <a
+                href="/product-description/productdescription.html?product=wooden-bowl"
+              >
+                <img src="/api/placeholder/400/200" alt="Wooden Crafts" />
+              </a>
+            </div>
+            <div class="category-info">
+              <h3>Wooden Crafts</h3>
+              <a
+                href="/product-description/productdescription.html?product=wooden-bowl"
+                class="cta-button"
+                >Explore</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+      <div class="container">
+        <h2 class="section-title">Featured Products</h2>
+        <!-- Empty product grid that will be populated by JavaScript -->
+        <div class="product-grid">
+          <!-- Products will be dynamically inserted here from the backend -->
+          <div class="loading-indicator">Loading products...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artisan Story -->
+    <section class="artisan-story">
+      <div class="container">
+        <div class="story-container">
+          <div class="story-img">
+            <img src="/api/placeholder/600/400" alt="Artisan at work" />
+          </div>
+          <div class="story-content">
+            <h2>Our Artisan Story</h2>
+            <p>
+              At SK HandiCraft, we work directly with skilled craftspeople from
+              around the world who create beautiful objects using traditional
+              techniques passed down through generations.
+            </p>
+            <p>
+              Each product in our collection tells a unique story of cultural
+              heritage, sustainable practices, and exceptional craftsmanship.
+              When you purchase from us, you're not just buying a product –
+              you're supporting artisans and helping preserve ancient craft
+              traditions.
+            </p>
+            <a href="#" class="cta-button">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+      <div class="container">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              <p>
+                The craftsmanship of my ceramic vase is exceptional. It's
+                evident that real artisans made this with care and attention to
+                detail. I'll definitely be shopping here again!
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-img">
+                <img src="/api/placeholder/100/100" alt="Customer" />
+              </div>
+              <div class="author-info">
+                <h4>Sarah Johnson</h4>
+                <p>Verified Buyer</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              <p>
+                I purchased the handwoven basket as a gift for my mother, and
+                she absolutely loves it! The quality is outstanding, and knowing
+                it supports traditional artisans makes it even more special.
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-img">
+                <img src="/api/placeholder/100/100" alt="Customer" />
+              </div>
+              <div class="author-info">
+                <h4>Michael Davis</h4>
+                <p>Verified Buyer</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              <p>
+                The embroidered cushion covers have transformed my living room.
+                The craftsmanship is impeccable, and the colors are even more
+                vibrant in person. Fast shipping too!
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-img">
+                <img src="/api/placeholder/100/100" alt="Customer" />
+              </div>
+              <div class="author-info">
+                <h4>Elena Rodriguez</h4>
+                <p>Verified Buyer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+      <div class="container">
+        <h2>Join Our Community</h2>
+        <p>
+          Subscribe to our newsletter to stay updated on new artisan
+          collections, special offers, and the stories behind our products.
+        </p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Enter your email address" />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer - Matched with productcart.html -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>SK HandiCraft</h3>
+          <p>
+            Handcrafted with love and precision. Bringing traditional artistry
+            to modern homes.
+          </p>
+          <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cart.html">Shop</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul class="contact-info">
+            <li>
+              <i class="fa-solid fa-location-dot"></i> 123 Crafters Lane,
+              Artisan District
+            </li>
+            <li><i class="fa-solid fa-phone"></i> +91 98765 43210</li>
+            <li><i class="fa-solid fa-envelope"></i> info@skhandicraft.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 SK HandiCraft. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Load cart.js first, then script.js -->
+    <script src="/Landing-page/cart.js"></script>
+    <script src="/Landing-page/script.js"></script>
+
+    <!-- Debug script to check for errors -->
+    <script>
+      window.addEventListener("error", function (e) {
+        console.error(
+          "JavaScript Error:",
+          e.message,
+          "at",
+          e.filename,
+          "line",
+          e.lineno
+        );
+      });
+    </script>
+  </body>
+</html>
