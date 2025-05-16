@@ -131,94 +131,6 @@ if (testimonialNextBtn) {
   });
 }
 
-// Sample product data (in a real app, this would come from a backend API)
-const products = [
-  {
-    id: 1,
-    name: "Hand-woven Jute Bag",
-    price: 1299,
-    image: "/api/placeholder/400/200",
-    category: "Bags",
-  },
-  {
-    id: 2,
-    name: "Embroidered Cushion Cover",
-    price: 899,
-    image: "/api/placeholder/400/200",
-    category: "Home Decor",
-  },
-  {
-    id: 3,
-    name: "Handmade Ceramic Planter",
-    price: 1499,
-    image: "/api/placeholder/400/200",
-    category: "Pottery",
-  },
-  {
-    id: 4,
-    name: "Macrame Wall Hanging",
-    price: 1999,
-    image: "/api/placeholder/400/200",
-    category: "Wall Art",
-  },
-  {
-    id: 5,
-    name: "Hand-painted Coffee Mug",
-    price: 699,
-    image: "/api/placeholder/400/200",
-    category: "Kitchen",
-  },
-  {
-    id: 6,
-    name: "Bamboo Storage Basket",
-    price: 999,
-    image: "/api/placeholder/400/200",
-    category: "Storage",
-  },
-  {
-    id: 7,
-    name: "Cotton Table Runner",
-    price: 799,
-    image: "/api/placeholder/400/200",
-    category: "Dining",
-  },
-  {
-    id: 8,
-    name: "Wooden Serving Tray",
-    price: 1799,
-    image: "/api/placeholder/400/200",
-    category: "Kitchen",
-  },
-  {
-    id: 9,
-    name: "Handwoven Woolen Scarf",
-    price: 1199,
-    image: "/api/placeholder/400/200",
-    category: "Accessories",
-  },
-  {
-    id: 10,
-    name: "Terracotta Wind Chimes",
-    price: 899,
-    image: "/api/placeholder/400/200",
-    category: "Garden",
-  },
-  {
-    id: 11,
-    name: "Hand-carved Wooden Bowl",
-    price: 1599,
-    image: "/api/placeholder/400/200",
-    category: "Kitchen",
-  },
-  {
-    id: 12,
-    name: "Embroidered Tote Bag",
-    price: 1099,
-    image: "/api/placeholder/400/200",
-    category: "Bags",
-  },
-];
-
 // Variables to control product loading
 let currentProductsShown = 0;
 const productsPerLoad = 4;
@@ -281,9 +193,6 @@ function loadProducts() {
       // Add button to container
       btnBox.appendChild(loadMoreBtn);
 
-      // Add the products and button to the grid
-      loadMoreProducts();
-
       // Add the button container after the product grid
       productGrid.parentNode.insertBefore(btnBox, productGrid.nextSibling);
     }
@@ -294,31 +203,8 @@ function loadProducts() {
 function loadMoreProducts() {
   if (!productGrid) return;
 
-  const startIndex = currentProductsShown;
-  const endIndex = Math.min(startIndex + productsPerLoad, products.length);
-
-  // Loop through products and add them to the grid
-  for (let i = startIndex; i < endIndex; i++) {
-    const productCard = createProductCard(products[i]);
-    productGrid.appendChild(productCard);
-
-    // Add event listener to the Add to Cart button
-    const addToCartBtn = productCard.querySelector(".add-to-cart-btn");
-    if (addToCartBtn) {
-      addToCartBtn.addEventListener("click", function () {
-        addToCart(products[i]);
-      });
-    }
-  }
-
-  // Update the count of products shown
-  currentProductsShown = endIndex;
-
-  // Disable load more button if all products are shown
-  if (loadMoreBtn && currentProductsShown >= products.length) {
-    loadMoreBtn.disabled = true;
-    loadMoreBtn.textContent = "All Products Loaded";
-  }
+  // In a real application, you would fetch products from an API here
+  // For now, this function is kept but the sample products array has been removed
 }
 
 // Add to cart function
