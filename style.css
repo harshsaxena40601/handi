@@ -10313,7 +10313,7 @@ a:focus {
 .navbar-brand span {
   font-size: 28px;
   font-weight: bold;
-  color: #000000;
+  color: darkblue;
   text-transform: uppercase;
   margin: 0;
   padding: 0;
@@ -10910,7 +10910,7 @@ a:focus {
 .client_section .carousel-control-prev,
 .client_section .carousel-control-next {
   width: 45px;
-  height: 125px;
+  height: 46px;
   background-color: #db4f66;
   opacity: 1;
   font-size: 28px;
@@ -10958,7 +10958,7 @@ a:focus {
 
 .info_section .social_container .social_box a {
   margin: 0 10px;
-  color: #ffffff;
+  color: black;
   font-size: 24px;
 }
 
