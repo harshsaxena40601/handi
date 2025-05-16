@@ -1,3 +1,6 @@
+// API base URL constant
+const API_BASE_URL = "http://127.0.0.1:8000/api";
+
 // Function to get URL parameters
 function getUrlParameter(name) {
   const urlParams = new URLSearchParams(window.location.search);
@@ -41,10 +44,8 @@ async function loadProductDetails() {
       return;
     }
 
-    // Fetch product data from backend API
-    const response = await fetch(
-      `http://127.0.0.1:8000/api/products/${productId}/`
-    );
+    // Fetch product data from backend API using the API_BASE_URL constant
+    const response = await fetch(`${API_BASE_URL}/products/${productId}/`);
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -80,7 +81,9 @@ async function loadProductDetails() {
     // Update main image and thumbnails if available
     if (product.images && product.images.length > 0) {
       // Update main image
-      const mainImageUrl = `http://127.0.0.1:8000${product.images[0].image}`;
+      const mainImageUrl = `${API_BASE_URL.replace("/api", "")}${
+        product.images[0].image
+      }`;
       const mainImage = document.getElementById("main-product-image");
       mainImage.src = mainImageUrl;
       mainImage.alt = product.name;
@@ -91,7 +94,7 @@ async function loadProductDetails() {
         thumbnailContainer.innerHTML = ""; // Clear existing thumbnails
 
         product.images.forEach((img, index) => {
-          const imgUrl = `http://127.0.0.1:8000${img.image}`;
+          const imgUrl = `${API_BASE_URL.replace("/api", "")}${img.image}`;
           const thumbnail = document.createElement("img");
           thumbnail.src = imgUrl;
           thumbnail.alt = `${product.name} - View ${index + 1}`;
@@ -114,7 +117,7 @@ async function loadProductDetails() {
       price: product.price,
       image:
         product.images && product.images.length > 0
-          ? `http://127.0.0.1:8000${product.images[0].image}`
+          ? `${API_BASE_URL.replace("/api", "")}${product.images[0].image}`
           : "/api/placeholder/400/320",
     };
 
@@ -133,16 +136,14 @@ async function loadProductDetails() {
 // Function to load recommended products from backend
 async function loadRecommendedProducts(currentProductId) {
   try {
-    // Fetch recommended products (you might need to adjust the API endpoint)
+    // Fetch recommended products using the API_BASE_URL constant
     const response = await fetch(
-      `http://127.0.0.1:8000/api/products/recommended/?exclude=${currentProductId}`
+      `${API_BASE_URL}/products/recommended/?exclude=${currentProductId}`
     );
 
     if (!response.ok) {
       // If recommended endpoint fails, try fetching all products
-      const allProductsResponse = await fetch(
-        `http://127.0.0.1:8000/api/products/`
-      );
+      const allProductsResponse = await fetch(`${API_BASE_URL}/products/`);
       if (!allProductsResponse.ok) {
         throw new Error(`HTTP error! Status: ${allProductsResponse.status}`);
       }
@@ -185,7 +186,7 @@ function displayRecommendedProducts(products, currentProductId) {
     // Get product image or use placeholder
     const productImage =
       product.images && product.images.length > 0
-        ? `http://127.0.0.1:8000${product.images[0].image}`
+        ? `${API_BASE_URL.replace("/api", "")}${product.images[0].image}`
         : "/api/placeholder/400/320";
 
     productCard.innerHTML = `

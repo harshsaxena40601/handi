@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // API base URL constant
-const API_BASE_URL = "http://127.0.0.1:8000";
+// const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = "https://handicraft-5708.onrender.com";
 
 // Separated product fetching into its own function
 function fetchProducts() {
