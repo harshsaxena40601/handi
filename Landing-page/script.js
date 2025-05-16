@@ -1,4 +1,4 @@
-// script.js - Fixed version with better error handling
+// script.js - Fixed version with better error handling and API constant
 document.addEventListener("DOMContentLoaded", function () {
   console.log("Main script loaded");
 
@@ -22,6 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// API base URL constant
+const API_BASE_URL = "http://127.0.0.1:8000";
 
 // Separated product fetching into its own function
 function fetchProducts() {
@@ -56,7 +59,7 @@ function fetchProducts() {
   `;
   document.head.appendChild(style);
 
-  fetch("http://127.0.0.1:8000/api/products/")
+  fetch(`${API_BASE_URL}/api/products/`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -75,7 +78,7 @@ function fetchProducts() {
         productContainer.innerHTML = `
           <div class="error-message">
             <p><strong>Unable to load products.</strong></p>
-            <p>Please check that the backend server is running at http://127.0.0.1:8000</p>
+            <p>Please check that the backend server is running at ${API_BASE_URL}</p>
             <p>Error details: ${error.message}</p>
             <button onclick="fetchProducts()" class="retry-btn">Retry</button>
           </div>
@@ -160,7 +163,7 @@ function createProductCard(product) {
   // Ensure that the image URL is complete (prefix the domain if necessary)
   const productImage =
     product.images && product.images.length > 0
-      ? `http://127.0.0.1:8000${product.images[0].image}`
+      ? `${API_BASE_URL}${product.images[0].image}`
       : "/api/placeholder/400/300"; // fallback to placeholder if no image
 
   productCard.innerHTML = `
