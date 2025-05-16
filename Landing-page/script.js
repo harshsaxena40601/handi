@@ -85,39 +85,6 @@ function fetchProducts() {
           </div>
         `;
       }
-
-      // Add some test products if in development mode
-      if (
-        window.location.hostname === "localhost" ||
-        window.location.hostname === "127.0.0.1"
-      ) {
-        console.log("Loading test products for development");
-        const testProducts = [
-          {
-            id: "test1",
-            name: "Handwoven Bamboo Basket",
-            description:
-              "A beautiful hand-crafted basket made from sustainable bamboo.",
-            price: 899,
-            images: [],
-          },
-          {
-            id: "test2",
-            name: "Ceramic Flower Vase",
-            description: "Elegant ceramic vase with hand-painted details.",
-            price: 1299,
-            images: [],
-          },
-          {
-            id: "test3",
-            name: "Embroidered Cushion Cover",
-            description: "Intricate embroidery on premium cotton fabric.",
-            price: 599,
-            images: [],
-          },
-        ];
-        populateProducts(testProducts);
-      }
     });
 }
 
