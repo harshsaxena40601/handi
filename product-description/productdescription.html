@@ -369,6 +369,9 @@
     <!-- IMPORTANT: Load cart.js first, then the product script -->
     <script src="/Landing-page/cart.js"></script>
     <script>
+      // API base URL constant - Use the same one defined in script.js
+      const API_BASE_URL = "https://handicraft-5708.onrender.com";
+
       // Function to get URL parameters
       function getUrlParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -394,9 +397,9 @@
             return;
           }
 
-          // Fetch product data from backend API
+          // Fetch product data from backend API using API_BASE_URL
           const response = await fetch(
-            `http://127.0.0.1:8000/api/products/${productId}/`
+            `${API_BASE_URL}/products/${productId}/`
           );
 
           if (!response.ok) {
@@ -442,8 +445,10 @@
 
           // Update main image and thumbnails if available
           if (product.images && product.images.length > 0) {
-            // Update main image
-            const mainImageUrl = `http://127.0.0.1:8000${product.images[0].image}`;
+            // Update main image - use the API_BASE_URL
+            const mainImageUrl = `${API_BASE_URL.replace("/api", "")}${
+              product.images[0].image
+            }`;
             const mainImage = document.getElementById("main-product-image");
             mainImage.src = mainImageUrl;
             mainImage.alt = product.name;
@@ -456,7 +461,9 @@
               thumbnailContainer.innerHTML = ""; // Clear existing thumbnails
 
               product.images.forEach((img, index) => {
-                const imgUrl = `http://127.0.0.1:8000${img.image}`;
+                const imgUrl = `${API_BASE_URL.replace("/api", "")}${
+                  img.image
+                }`;
                 const thumbnail = document.createElement("img");
                 thumbnail.src = imgUrl;
                 thumbnail.alt = `${product.name} - View ${index + 1}`;
@@ -483,7 +490,9 @@
             price: product.price,
             image:
               product.images && product.images.length > 0
-                ? `http://127.0.0.1:8000${product.images[0].image}`
+                ? `${API_BASE_URL.replace("/api", "")}${
+                    product.images[0].image
+                  }`
                 : "/api/placeholder/400/320",
           };
 
@@ -524,15 +533,15 @@
           productsGrid.innerHTML =
             '<div class="loading-container"><div class="loading-spinner"></div></div>';
 
-          // Fetch recommended products
+          // Fetch recommended products using API_BASE_URL
           const response = await fetch(
-            `http://127.0.0.1:8000/api/products/recommended/?exclude=${currentProductId}`
+            `${API_BASE_URL}/products/recommended/?exclude=${currentProductId}`
           );
 
           if (!response.ok) {
             // If recommended endpoint fails, try fetching all products
             const allProductsResponse = await fetch(
-              `http://127.0.0.1:8000/api/products/`
+              `${API_BASE_URL}/products/`
             );
             if (!allProductsResponse.ok) {
               throw new Error(
@@ -592,10 +601,10 @@
           const productCard = document.createElement("div");
           productCard.className = "product-card";
 
-          // Get product image or use placeholder
+          // Get product image or use placeholder - use API_BASE_URL
           const productImage =
             product.images && product.images.length > 0
-              ? `http://127.0.0.1:8000${product.images[0].image}`
+              ? `${API_BASE_URL.replace("/api", "")}${product.images[0].image}`
               : "/api/placeholder/400/320";
 
           productCard.innerHTML = `
