@@ -1,5 +1,6 @@
 // API base URL constant
-const API_BASE_URL = "http://127.0.0.1:8000/api";
+// const API_BASE_URL = "http://127.0.0.1:8000/api";
+const API_BASE_URL = "https://handicraft-5708.onrender.com";
 
 // Function to get URL parameters
 function getUrlParameter(name) {
