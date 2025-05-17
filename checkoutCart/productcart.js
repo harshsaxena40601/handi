@@ -120,7 +120,7 @@ function addItemToCart(id, name, price, quantity = 1, imageUrl) {
       name: name,
       price: numericPrice,
       quantity: quantity,
-      imageUrl: imageUrl || "/api/placeholder/80/80",
+      imageUrl: imageUrl || getDefaultImageUrl(id), // Use a function to get default image
     });
     console.log("Added new item to cart");
   }
@@ -138,6 +138,20 @@ function addItemToCart(id, name, price, quantity = 1, imageUrl) {
 
   // Show notification that item was added
   showCartNotification(name);
+}
+
+// Helper function to generate default image URLs based on product ID
+function getDefaultImageUrl(productId) {
+  // This maps product IDs to their appropriate image paths
+  const imageMap = {
+    hand001: "Media/products/wooden-lamp.jpg",
+    hand002: "Media/products/table-runner.jpg",
+    hand003: "Media/products/ceramic-vase.jpg",
+    // Add more mappings as needed
+  };
+
+  // Return the mapped image or a generic default
+  return imageMap[productId] || "Media/products/default-product.jpg";
 }
 
 // Remove item from cart
@@ -291,8 +305,11 @@ function createCartItemElement(item) {
   const quantity = parseInt(item.quantity) || 1;
   const itemTotal = (price * quantity).toFixed(2);
 
-  // Use a default image if none is provided
-  const imageUrl = item.imageUrl || "/api/placeholder/80/80";
+  // Default image URL if none is provided or fix placeholder URL
+  const imageUrl =
+    item.imageUrl && !item.imageUrl.includes("/api/placeholder")
+      ? item.imageUrl
+      : getDefaultImageUrl(item.id);
 
   itemDiv.innerHTML = `
     <div class="item-image">
@@ -519,19 +536,11 @@ function checkIfCartEmpty() {
 // Improved function to update cart summary
 function updateCartSummary() {
   // Get elements
-  const itemsCountEl = document.querySelector(
-    ".summary-item:first-child .summary-label"
-  );
-  const subtotalEl = document.querySelector(
-    ".summary-item:first-child .summary-value"
-  );
-  const shippingEl = document.querySelector(
-    ".summary-item:nth-child(2) .summary-value"
-  );
-  const taxEl = document.querySelector(
-    ".summary-item:nth-child(3) .summary-value"
-  );
-  const totalEl = document.querySelector(".total-value");
+  const itemsCountEl = document.getElementById("summary-items");
+  const subtotalEl = document.getElementById("summary-subtotal");
+  const shippingEl = document.getElementById("summary-shipping");
+  const taxEl = document.getElementById("summary-tax");
+  const totalEl = document.getElementById("summary-total");
 
   if (!itemsCountEl || !subtotalEl || !shippingEl || !taxEl || !totalEl) {
     console.warn("Summary elements not found");
@@ -573,21 +582,21 @@ function addTestProducts() {
     "Handcrafted Wooden Lamp",
     1299,
     1,
-    "/api/placeholder/80/80"
+    "Media/products/wooden-lamp.jpg"
   );
   addItemToCart(
     "hand002",
     "Embroidered Table Runner",
     899,
     2,
-    "/api/placeholder/80/80"
+    "Media/products/table-runner.jpg"
   );
   addItemToCart(
     "hand003",
     "Ceramic Flower Vase",
     749,
     1,
-    "/api/placeholder/80/80"
+    "Media/products/ceramic-vase.jpg"
   );
 }
 
@@ -617,24 +626,4 @@ if (
     loadCart();
     updateCartCounter();
   });
-}
-function updateCartSummary() {
-  const itemsCountEl = document.getElementById("summary-items");
-  const subtotalEl = document.getElementById("summary-subtotal");
-  const shippingEl = document.getElementById("summary-shipping");
-  const taxEl = document.getElementById("summary-tax");
-  const totalEl = document.getElementById("summary-total");
-
-  const itemCount = getCartItemCount();
-  const cartTotal = getCartTotal();
-
-  let shippingCost = cartTotal > 0 && cartTotal < 1000 ? 100 : 0;
-  const tax = cartTotal * 0.18;
-  const total = cartTotal + shippingCost + tax;
-
-  if (itemsCountEl) itemsCountEl.textContent = `Items (${itemCount})`;
-  if (subtotalEl) subtotalEl.textContent = `₹${cartTotal.toFixed(2)}`;
-  if (shippingEl) shippingEl.textContent = `₹${shippingCost.toFixed(2)}`;
-  if (taxEl) taxEl.textContent = `₹${tax.toFixed(2)}`;
-  if (totalEl) totalEl.textContent = `₹${total.toFixed(2)}`;
 }
