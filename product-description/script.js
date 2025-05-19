@@ -93,6 +93,7 @@ async function loadProductDetails() {
       image: mainImageUrl,
     };
 
+    // Load recommended products after product details have been loaded
     loadRecommendedProducts(product.id);
   } catch (err) {
     console.error("Failed to load product:", err);
@@ -120,26 +121,56 @@ function showEmptyState(title, message) {
 // Load recommended products
 async function loadRecommendedProducts(currentId) {
   const grid = document.querySelector(".products-grid");
-  grid.innerHTML = `<div class="loading-spinner"></div>`;
+
+  // Clear previous content and show loading spinner
+  grid.innerHTML = '<div class="loading-spinner"></div>';
 
   try {
-    const res = await fetch(
-      `${API_BASE_URL}/api/products/recommended/?exclude=${currentId}`
-    );
-    const data = res.ok ? await res.json() : [];
+    console.log(`Fetching recommendations for product ${currentId}`);
 
-    if (!data.length) throw new Error("No recommendations");
+    // Since the /recommended/ endpoint returns 404, let's use the regular products endpoint instead
+    // and fetch all products, then filter out the current one
+    const res = await fetch(`${API_BASE_URL}/api/products/`);
 
+    // Log response status for debugging
+    console.log(`API Response Status: ${res.status}`);
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch products (HTTP ${res.status})`);
+    }
+
+    const allProducts = await res.json();
+    // Filter out the current product
+    const data = allProducts.filter((product) => product.id != currentId);
+    console.log(`Found ${data.length} other products to recommend`);
+
+    // Handle case with no recommendations
+    if (!data || !data.length) {
+      grid.innerHTML = `<div class="empty-state"><p>No recommendations available at this time.</p></div>`;
+      return;
+    }
+
+    // Clear the grid before adding new content
     grid.innerHTML = "";
+
+    // Limit to maximum 4 recommendations
     const max = Math.min(4, data.length);
-    for (let i = 0; i < max; i++) {
+    let productsAdded = 0;
+
+    // Loop through received products
+    for (let i = 0; i < data.length && productsAdded < max; i++) {
       const p = data[i];
+
+      // Skip if it's the current product (shouldn't happen with exclude parameter, but just in case)
       if (p.id == currentId) continue;
 
-      const img = p.images?.[0]?.image
-        ? `${API_BASE_URL}${p.images[0].image}`
-        : "/api/placeholder/400/320";
+      // Get image URL or use placeholder
+      const img =
+        p.images && p.images.length > 0 && p.images[0].image
+          ? `${API_BASE_URL}${p.images[0].image}`
+          : "/api/placeholder/400/320";
 
+      // Create product card
       const card = document.createElement("div");
       card.className = "product-card";
       card.innerHTML = `
@@ -156,19 +187,24 @@ async function loadRecommendedProducts(currentId) {
         </div>
       `;
       grid.appendChild(card);
+      productsAdded++;
     }
 
+    // Add event listeners for "Add to Cart" buttons
     document.querySelectorAll(".add-to-cart-recommended").forEach((btn) => {
       btn.addEventListener("click", () => {
         const { id, name, price, image } = btn.dataset;
         if (typeof addItemToCart === "function") {
           addItemToCart(id, name, price, 1, image);
           showAddToCartConfirmation(name);
+        } else {
+          console.error("addItemToCart function not found");
         }
       });
     });
-  } catch {
-    grid.innerHTML = `<div class="empty-state"><p>No recommendations found.</p></div>`;
+  } catch (err) {
+    console.error("Failed to load recommendations:", err);
+    grid.innerHTML = `<div class="empty-state"><p>Unable to load recommendations: ${err.message}</p></div>`;
   }
 }
 
@@ -191,7 +227,14 @@ function setupAddToCartButton() {
 
 // Init on DOM ready
 document.addEventListener("DOMContentLoaded", () => {
-  if (typeof loadCart === "function") loadCart();
+  // Check if cart.js is properly loaded
+  if (typeof loadCart === "function") {
+    console.log("Cart functionality loaded successfully");
+    loadCart();
+  } else {
+    console.error("Warning: cart.js might not be properly loaded");
+  }
+
   loadProductDetails();
   setupAddToCartButton();
 
