@@ -1,391 +1,204 @@
-// API base URL constant
-// const API_BASE_URL = "http://127.0.0.1:8000/api";
 const API_BASE_URL = "https://handicraft-5708.onrender.com";
 
-// Function to get URL parameters
+// Get product ID from URL
 function getUrlParameter(name) {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(name);
 }
 
-// Initialize static product data for fallback
-const productData = {
-  "floral-purse": {
-    name: "Handcrafted Floral Purse",
-    price: "$49.99",
-    description:
-      "This beautiful handcrafted floral purse is made with love and attention to detail. Each piece is unique, featuring intricate embroidery and high-quality materials that ensure both style and durability. Perfect for adding a touch of elegance to any outfit or as a thoughtful gift for someone special.",
-    features: [
-      "Handmade with premium fabric",
-      "Unique floral embroidery design",
-      "Spacious interior with inner pocket",
-      "Adjustable shoulder strap",
-      "Secure zipper closure",
-      'Dimensions: 9" × 6" × 3"',
-    ],
-    mainImage: "product1.jpg",
-  },
-};
-
-// Function to load product details from backend API
-async function loadProductDetails() {
-  try {
-    // Get the product ID from URL
-    const productId = getUrlParameter("product");
-
-    if (!productId) {
-      console.log("No product ID specified in URL");
-      // Use the default product if no ID is specified
-      window.currentProduct = {
-        id: "floral-purse",
-        name: "Handcrafted Floral Purse",
-        price: 49.99,
-        image: "product1.jpg",
-      };
-      return;
-    }
-
-    // Fetch product data from backend API using the API_BASE_URL constant
-    const response = await fetch(`${API_BASE_URL}/products/${productId}/`);
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const product = await response.json();
-
-    // Update product title
-    document.querySelector(".product-title").textContent = product.name;
-
-    // Update breadcrumb
-    document.querySelector(".product-breadcrumb span").textContent =
-      product.name;
-
-    // Update price (assuming price is stored as number in database)
-    document.querySelector(".product-price").textContent = `₹${product.price}`;
-
-    // Update description
-    document.querySelector(".product-description p").textContent =
-      product.description;
-
-    // Update features list if available
-    if (product.features && Array.isArray(product.features)) {
-      const featuresList = document.querySelector(".product-features ul");
-      featuresList.innerHTML = "";
-      product.features.forEach((feature) => {
-        const li = document.createElement("li");
-        li.textContent = feature;
-        featuresList.appendChild(li);
-      });
-    }
-
-    // Update main image and thumbnails if available
-    if (product.images && product.images.length > 0) {
-      // Update main image
-      const mainImageUrl = `${API_BASE_URL.replace("/api", "")}${
-        product.images[0].image
-      }`;
-      const mainImage = document.getElementById("main-product-image");
-      mainImage.src = mainImageUrl;
-      mainImage.alt = product.name;
-
-      // Update thumbnails if there are multiple images
-      const thumbnailContainer = document.querySelector(".thumbnail-container");
-      if (thumbnailContainer) {
-        thumbnailContainer.innerHTML = ""; // Clear existing thumbnails
-
-        product.images.forEach((img, index) => {
-          const imgUrl = `${API_BASE_URL.replace("/api", "")}${img.image}`;
-          const thumbnail = document.createElement("img");
-          thumbnail.src = imgUrl;
-          thumbnail.alt = `${product.name} - View ${index + 1}`;
-          thumbnail.className = "thumbnail";
-          if (index === 0) thumbnail.classList.add("active");
-
-          thumbnail.onclick = function () {
-            changeImage(imgUrl, this);
-          };
-
-          thumbnailContainer.appendChild(thumbnail);
-        });
-      }
-    }
-
-    // Store current product data for add to cart functionality
-    window.currentProduct = {
-      id: productId,
-      name: product.name,
-      price: product.price,
-      image:
-        product.images && product.images.length > 0
-          ? `${API_BASE_URL.replace("/api", "")}${product.images[0].image}`
-          : "/api/placeholder/400/320",
-    };
-
-    // Update page title
-    document.title = `${product.name} - SK HandiCraft`;
-
-    // Also fetch recommended products
-    loadRecommendedProducts(productId);
-  } catch (error) {
-    console.error("Error loading product details:", error);
-    // Fallback to static data if API call fails
-    fallbackToStaticData();
-  }
-}
-
-// Function to load recommended products from backend
-async function loadRecommendedProducts(currentProductId) {
-  try {
-    // Fetch recommended products using the API_BASE_URL constant
-    const response = await fetch(
-      `${API_BASE_URL}/products/recommended/?exclude=${currentProductId}`
-    );
-
-    if (!response.ok) {
-      // If recommended endpoint fails, try fetching all products
-      const allProductsResponse = await fetch(`${API_BASE_URL}/products/`);
-      if (!allProductsResponse.ok) {
-        throw new Error(`HTTP error! Status: ${allProductsResponse.status}`);
-      }
-
-      const allProducts = await allProductsResponse.json();
-      // Filter out current product
-      const filteredProducts = allProducts.filter(
-        (p) => p.id !== currentProductId
-      );
-      displayRecommendedProducts(filteredProducts, currentProductId);
-      return;
-    }
-
-    const products = await response.json();
-    displayRecommendedProducts(products, currentProductId);
-  } catch (error) {
-    console.error("Error loading recommended products:", error);
-  }
-}
-
-// Function to display recommended products
-function displayRecommendedProducts(products, currentProductId) {
-  // Get the products grid container
-  const productsGrid = document.querySelector(".products-grid");
-  if (!productsGrid) return;
-
-  // Clear existing recommended products
-  productsGrid.innerHTML = "";
-
-  // Add up to 4 recommended products
-  const maxProducts = Math.min(4, products.length);
-  for (let i = 0; i < maxProducts; i++) {
-    const product = products[i];
-    // Skip if this is the current product
-    if (product.id === currentProductId) continue;
-
-    const productCard = document.createElement("div");
-    productCard.className = "product-card";
-
-    // Get product image or use placeholder
-    const productImage =
-      product.images && product.images.length > 0
-        ? `${API_BASE_URL.replace("/api", "")}${product.images[0].image}`
-        : "/api/placeholder/400/320";
-
-    productCard.innerHTML = `
-      <img src="${productImage}" alt="${product.name}" />
-      <div class="product-card-content">
-        <h3>${product.name}</h3>
-        <div class="product-card-price">₹${product.price}</div>
-        <a href="productdescription.html?product=${product.id}" class="view-product-btn">View Product</a>
-        <button class="add-to-cart-recommended" 
-                data-id="${product.id}" 
-                data-name="${product.name}" 
-                data-price="${product.price}" 
-                data-image="${productImage}">Add to Cart</button>
-      </div>
-    `;
-
-    productsGrid.appendChild(productCard);
-  }
-
-  // Add event listeners to recommended product "Add to Cart" buttons
-  document.querySelectorAll(".add-to-cart-recommended").forEach((button) => {
-    button.addEventListener("click", function (e) {
-      e.preventDefault();
-      const productId = this.getAttribute("data-id");
-      const productName = this.getAttribute("data-name");
-      const price = this.getAttribute("data-price");
-      const imageUrl = this.getAttribute("data-image");
-
-      // Check if cart functions are available
-      if (typeof addItemToCart !== "function") {
-        console.error(
-          "Cart functions not available. Make sure cart.js is loaded first"
-        );
-        alert(
-          "Unable to add item to cart. Please refresh the page and try again."
-        );
-        return;
-      }
-
-      // Add item to cart (quantity 1 for quick add from recommendations)
-      addItemToCart(productId, productName, price, 1, imageUrl);
-
-      // Show confirmation
-      showAddToCartConfirmation(productName);
-    });
-  });
-}
-
-// Fallback function in case the API fails
-function fallbackToStaticData() {
-  // Get the product ID from URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const productId = urlParams.get("product") || "floral-purse"; // Default to floral purse if no parameter
-
-  // Use the static product data
-  const product = productData[productId] || productData["floral-purse"];
-
-  // Update product title
-  document.querySelector(".product-title").textContent = product.name;
-
-  // Update breadcrumb
-  document.querySelector(".product-breadcrumb span").textContent = product.name;
-
-  // Update price
-  document.querySelector(".product-price").textContent = product.price;
-
-  // Update description
-  document.querySelector(".product-description p").textContent =
-    product.description;
-
-  // Update features list
-  const featuresList = document.querySelector(".product-features ul");
-  featuresList.innerHTML = "";
-  product.features.forEach((feature) => {
-    const li = document.createElement("li");
-    li.textContent = feature;
-    featuresList.appendChild(li);
-  });
-
-  // Update main image
-  document.getElementById("main-product-image").src = product.mainImage;
-  document.getElementById("main-product-image").alt = product.name;
-
-  // Set current product data for add to cart
-  window.currentProduct = {
-    id: productId,
-    name: product.name,
-    price: parseFloat(product.price.replace("$", "")), // Convert price string to number
-    image: product.mainImage,
-  };
-
-  // Update page title
-  document.title = `${product.name} - SK HandiCraft`;
-}
-
-// Function to change the main product image
+// Switch main image when thumbnail is clicked
 function changeImage(src, thumbnail) {
-  document.getElementById("main-product-image").src = src;
+  const mainImage = document.getElementById("main-product-image");
+  if (mainImage) mainImage.src = src;
 
-  // Remove active class from all thumbnails
-  const thumbnails = document.querySelectorAll(".thumbnail");
-  thumbnails.forEach((thumb) => {
-    thumb.classList.remove("active");
-  });
-
-  // Add active class to clicked thumbnail
+  document
+    .querySelectorAll(".thumbnail")
+    .forEach((t) => t.classList.remove("active"));
   thumbnail.classList.add("active");
 }
 
-// Function to add product to cart - using cart.js functionality
-function addToCart() {
-  console.log("Add to cart function called");
-
-  // First check if cart functions are available
-  if (typeof addItemToCart !== "function") {
-    console.error(
-      "addItemToCart function not found! Make sure cart.js is loaded properly."
-    );
-    alert("Unable to add item to cart. Please refresh the page and try again.");
-    return false;
-  }
-
-  if (!window.currentProduct) {
-    console.error("Product details not loaded properly");
-    return false;
-  }
-
-  const quantityInput = document.getElementById("quantity");
-  if (!quantityInput) {
-    console.error("Quantity input not found");
-    return false;
-  }
-
-  const quantity = parseInt(quantityInput.value) || 1;
-  const { id, name, price, image } = window.currentProduct;
-
-  console.log("Adding product to cart:", { id, name, price, quantity, image });
-
-  // Add to cart using the shared cart.js functionality
-  const added = addItemToCart(id, name, price, quantity, image);
-
-  if (added) {
-    // Show confirmation
-    showAddToCartConfirmation(name);
-    return true;
-  }
-
-  return false;
+// Show confirmation message after adding to cart
+function showAddToCartConfirmation(productName) {
+  const div = document.createElement("div");
+  div.className = "add-to-cart-confirmation";
+  div.textContent = `${productName} added to cart!`;
+  document.body.appendChild(div);
+  setTimeout(() => div.remove(), 3000);
 }
 
-// Initialize when the page loads
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("Product description page initialized");
-
-  // Check if cart.js functions are available - this is important!
-  if (typeof loadCart !== "function") {
-    console.error(
-      "loadCart function not found. Make sure cart.js is loaded before script.js"
+// Fetch and display product details
+async function loadProductDetails() {
+  const productId = getUrlParameter("product");
+  if (!productId)
+    return showEmptyState(
+      "No product ID",
+      "Try selecting a product from the homepage."
     );
-    // Add an error message to the page
-    const errorMsg = document.createElement("div");
-    errorMsg.className = "error-message";
-    errorMsg.innerHTML = `
-      <p><strong>Error:</strong> Cart functionality not available.</p>
-      <p>Please make sure all scripts are properly loaded.</p>
-    `;
-    document.body.prepend(errorMsg);
-  } else {
-    // Initialize cart
-    loadCart();
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/products/${productId}/`);
+    if (!res.ok) throw new Error(`Product not found (HTTP ${res.status})`);
+    const product = await res.json();
+
+    // Show content
+    document.querySelector(".loading-container").style.display = "none";
+    document.querySelector(".product-gallery").style.display = "block";
+    document.querySelector(".product-details").style.display = "block";
+
+    // Populate fields
+    document.querySelector(".product-title").textContent = product.name;
+    document.querySelector(".product-breadcrumb span").textContent =
+      product.name;
+    document.querySelector(".product-price").textContent = `₹${product.price}`;
+    document.querySelector(".product-description p").textContent =
+      product.description;
+    document.title = `${product.name} - SK HandiCraft`;
+
+    // Image
+    const mainImageUrl = product.images?.[0]?.image
+      ? `${API_BASE_URL}${product.images[0].image}`
+      : "/api/placeholder/400/320";
+
+    const mainImage = document.getElementById("main-product-image");
+    mainImage.src = mainImageUrl;
+    mainImage.alt = product.name;
+
+    // Thumbnails
+    const thumbnailContainer = document.querySelector(".thumbnail-container");
+    thumbnailContainer.innerHTML = "";
+    product.images?.forEach((img, index) => {
+      const url = `${API_BASE_URL}${img.image}`;
+      const thumb = document.createElement("img");
+      thumb.src = url;
+      thumb.className = "thumbnail";
+      if (index === 0) thumb.classList.add("active");
+      thumb.addEventListener("click", () => changeImage(url, thumb));
+      thumbnailContainer.appendChild(thumb);
+    });
+
+    // Features
+    const featuresList = document.querySelector(".product-features ul");
+    featuresList.innerHTML = "";
+    (product.features || []).forEach((f) => {
+      const li = document.createElement("li");
+      li.textContent = f;
+      featuresList.appendChild(li);
+    });
+
+    // Save for cart
+    window.currentProduct = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: mainImageUrl,
+    };
+
+    loadRecommendedProducts(product.id);
+  } catch (err) {
+    console.error("Failed to load product:", err);
+    showEmptyState(
+      "Product not found",
+      "Try going back and selecting another item."
+    );
   }
+}
 
-  // Load product details
+// Show error/empty state
+function showEmptyState(title, message) {
+  const container = document.querySelector(".product-content");
+  container.innerHTML = `
+    <div class="empty-state">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <h3>${title}</h3>
+      <p>${message}</p>
+      <a href="/index.html" class="view-product-btn">Return Home</a>
+    </div>
+  `;
+  document.querySelector(".more-products").style.display = "none";
+}
+
+// Load recommended products
+async function loadRecommendedProducts(currentId) {
+  const grid = document.querySelector(".products-grid");
+  grid.innerHTML = `<div class="loading-spinner"></div>`;
+
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/api/products/recommended/?exclude=${currentId}`
+    );
+    const data = res.ok ? await res.json() : [];
+
+    if (!data.length) throw new Error("No recommendations");
+
+    grid.innerHTML = "";
+    const max = Math.min(4, data.length);
+    for (let i = 0; i < max; i++) {
+      const p = data[i];
+      if (p.id == currentId) continue;
+
+      const img = p.images?.[0]?.image
+        ? `${API_BASE_URL}${p.images[0].image}`
+        : "/api/placeholder/400/320";
+
+      const card = document.createElement("div");
+      card.className = "product-card";
+      card.innerHTML = `
+        <img src="${img}" alt="${p.name}" />
+        <div class="product-card-content">
+          <h3>${p.name}</h3>
+          <div class="product-card-price">₹${p.price}</div>
+          <a href="productdescription.html?product=${p.id}" class="view-product-btn">View Product</a>
+          <button class="add-to-cart-recommended"
+                  data-id="${p.id}"
+                  data-name="${p.name}"
+                  data-price="${p.price}"
+                  data-image="${img}">Add to Cart</button>
+        </div>
+      `;
+      grid.appendChild(card);
+    }
+
+    document.querySelectorAll(".add-to-cart-recommended").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const { id, name, price, image } = btn.dataset;
+        if (typeof addItemToCart === "function") {
+          addItemToCart(id, name, price, 1, image);
+          showAddToCartConfirmation(name);
+        }
+      });
+    });
+  } catch {
+    grid.innerHTML = `<div class="empty-state"><p>No recommendations found.</p></div>`;
+  }
+}
+
+// Handle add to cart button
+function setupAddToCartButton() {
+  const btn = document.querySelector(".add-to-cart-btn");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    const qty = parseInt(document.getElementById("quantity").value) || 1;
+    const p = window.currentProduct;
+    if (p && typeof addItemToCart === "function") {
+      addItemToCart(p.id, p.name, p.price, qty, p.image);
+      showAddToCartConfirmation(p.name);
+    } else {
+      alert("Cart not ready. Please refresh.");
+    }
+  });
+}
+
+// Init on DOM ready
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof loadCart === "function") loadCart();
   loadProductDetails();
+  setupAddToCartButton();
 
-  // Mobile menu toggle
   const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
   if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener("click", function () {
+    mobileMenuBtn.addEventListener("click", () => {
       document.querySelector(".mobile-menu").classList.toggle("active");
     });
-  }
-
-  // Add event listener for Add to Cart button
-  const addToCartBtn = document.querySelector(".add-to-cart-btn");
-  if (addToCartBtn) {
-    // Remove any existing event listeners by cloning and replacing
-    const newButton = addToCartBtn.cloneNode(true);
-    addToCartBtn.parentNode.replaceChild(newButton, addToCartBtn);
-
-    // Add event listener to the fresh button
-    newButton.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log("Add to cart button clicked");
-      addToCart();
-    });
-  } else {
-    console.error("Add to cart button not found");
   }
 });
