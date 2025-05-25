@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/product-description/style.css" />
+    <link rel="stylesheet" href="/product-description/productdescription.css" />
+    <link rel="stylesheet" href="product.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Irish+Grover&family=Jersey+25&family=Oregano:ital@0;1&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Products - SK HandiCraft</title>
+  </head>
+  <body>
+    <nav>
+      <div class="left">
+        <div class="logo">
+          <img src="/Media/logo.png" alt="Company logo" />
+        </div>
+        <div class="company-name">
+          <h1>SK HandiCraft</h1>
+        </div>
+      </div>
+      <div class="right">
+        <div class="com-icons">
+          <form action="" class="search-form">
+            <div class="search">
+              <span
+                class="search-input fa-solid fa-magnifying-glass fa-xl"
+                style="color: #010000"
+              ></span>
+              <input
+                class="search-icon"
+                type="search"
+                placeholder="Search here ..."
+              />
+            </div>
+          </form>
+
+          <a
+            href="/checkoutCart/productcart.html"
+            class="cart-icon"
+            style="position: relative"
+          >
+            <i
+              class="fa-solid fa-bag-shopping fa-xl"
+              style="color: #07090d"
+            ></i>
+            <span class="badge">0</span>
+          </a>
+          <a href="login.html" class="user-icon">
+            <i class="fa-solid fa-user fa-xl" style="color: #100d0d"></i>
+          </a>
+
+          <div class="nav-menu">
+            <a href="/other-unimportant-files/about.html">About</a>
+            <a href="/other-unimportant-files/contact.html">Contact</a>
+          </div>
+
+          <button class="mobile-menu-btn">
+            <i class="fa-solid fa-bars fa-xl"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-menu">
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="newindex.html">FAQ</a>
+      <a href="newindex.html">Shipping</a>
+    </div>
+
+    <div class="page-container">
+      <!-- Breadcrumb -->
+      <div class="product-breadcrumb">
+        <a href="/index.html">Home</a> > <span>Products</span>
+      </div>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">Our Handcrafted Collection</h1>
+        <p class="page-subtitle">
+          Discover unique, handmade treasures crafted with love and care
+        </p>
+      </div>
+
+      <!-- Filter and Sort Controls -->
+      <div class="controls-section">
+        <div class="filter-controls">
+          <div class="filter-group">
+            <label for="category-filter">Category:</label>
+            <select id="category-filter">
+              <option value="">All Categories</option>
+              <option value="pottery">Pottery</option>
+              <option value="textiles">Textiles</option>
+              <option value="jewelry">Jewelry</option>
+              <option value="woodwork">Woodwork</option>
+              <option value="art">Art & Decor</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="price-filter">Price Range:</label>
+            <select id="price-filter">
+              <option value="">All Prices</option>
+              <option value="0-25">$0 - $25</option>
+              <option value="25-50">$25 - $50</option>
+              <option value="50-100">$50 - $100</option>
+              <option value="100+">$100+</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="sort-filter">Sort by:</label>
+            <select id="sort-filter">
+              <option value="featured">Featured</option>
+              <option value="name-asc">Name (A-Z)</option>
+              <option value="name-desc">Name (Z-A)</option>
+              <option value="price-asc">Price (Low to High)</option>
+              <option value="price-desc">Price (High to Low)</option>
+              <option value="newest">Newest First</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="search-filters">
+          <div class="search-box">
+            <input
+              type="text"
+              id="product-search"
+              placeholder="Search products..."
+            />
+            <i class="fa-solid fa-search"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Section -->
+      <div class="products-section">
+        <div class="products-count">
+          <span id="products-count">Loading products...</span>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="products-grid">
+          <!-- Loading state initially -->
+          <div class="loading-container">
+            <div class="loading-spinner"></div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination" style="display: none">
+          <button id="prev-page" disabled>
+            <i class="fa-solid fa-chevron-left"></i> Previous
+          </button>
+          <div id="page-numbers"></div>
+          <button id="next-page">
+            Next <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/Landing-page/cart.js"></script>
+    <script src="product.js"></script>
+  </body>
+</html>
