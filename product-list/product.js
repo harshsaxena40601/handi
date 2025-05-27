@@ -396,34 +396,8 @@ function addToCartFromList(productId) {
       return;
     }
 
-    showAddToCartConfirmation(product.name);
     updateCartBadge();
   }
-}
-
-function showAddToCartConfirmation(productName) {
-  // Remove any existing confirmation
-  const existingConfirmation = document.querySelector(
-    ".add-to-cart-confirmation"
-  );
-  if (existingConfirmation) {
-    existingConfirmation.remove();
-  }
-
-  // Create and show new confirmation
-  const confirmation = document.createElement("div");
-  confirmation.className = "add-to-cart-confirmation";
-  confirmation.innerHTML = `
-    <i class="fa-solid fa-check-circle"></i>
-    ${productName} added to cart!
-  `;
-
-  document.body.appendChild(confirmation);
-
-  // Remove after 3 seconds
-  setTimeout(() => {
-    confirmation.remove();
-  }, 3000);
 }
 
 function quickView(productId) {
@@ -434,21 +408,6 @@ function quickView(productId) {
 function addToWishlist(productId) {
   // Implement wishlist functionality
   console.log("Add to wishlist:", productId);
-
-  // Show a simple notification
-  const notification = document.createElement("div");
-  notification.className = "add-to-cart-confirmation";
-  notification.style.backgroundColor = "#8c52ff";
-  notification.innerHTML = `
-    <i class="fa-solid fa-heart"></i>
-    Added to wishlist!
-  `;
-
-  document.body.appendChild(notification);
-
-  setTimeout(() => {
-    notification.remove();
-  }, 2000);
 }
 
 function updateCartBadge() {
@@ -552,33 +511,6 @@ style.textContent = `
 
   .retry-btn:hover {
     background-color: #7a47e6;
-  }
-
-  .add-to-cart-confirmation {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #4caf50;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 5px;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    animation: slideIn 0.3s ease-out;
-  }
-
-  @keyframes slideIn {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
   }
 
   /* Enhanced clickable product card styles */

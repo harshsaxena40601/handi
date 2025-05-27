@@ -3,25 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="stylesheet" href="/product-description/style.css" /> -->
-    <link rel="stylesheet" href="/product-description/productdescription.css" />
-    <link rel="stylesheet" href="product.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Irish+Grover&family=Jersey+25&family=Oregano:ital@0;1&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <title>Products - SK HandiCraft</title>
+    <title>SK Handicraft - Navigation</title>
     <style>
-      /* Navbar styles to match navbar.html */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f5f5f5;
+      }
+
       .header-container {
         background-color: white;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -188,7 +182,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        text-decoration: none;
       }
 
       .cart-btn:hover {
@@ -232,54 +225,6 @@
 
       .mobile-menu-toggle:hover {
         color: #2c3e50;
-      }
-
-      /* Fixed Add to cart notification styling */
-      .add-to-cart-confirmation {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        background: linear-gradient(135deg, #4caf50, #45a049);
-        color: white;
-        padding: 18px 24px;
-        border-radius: 12px;
-        box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
-        z-index: 1000;
-        animation: slideInUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        font-weight: 500;
-        font-size: 16px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        min-width: 280px;
-        max-width: 400px;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-      }
-
-      .add-to-cart-confirmation i {
-        font-size: 20px;
-        flex-shrink: 0;
-        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-      }
-
-      .add-to-cart-confirmation span {
-        flex: 1;
-        line-height: 1.4;
-      }
-
-      @keyframes slideInUp {
-        0% {
-          transform: translateY(100px) scale(0.8);
-          opacity: 0;
-        }
-        50% {
-          transform: translateY(-10px) scale(1.05);
-        }
-        100% {
-          transform: translateY(0) scale(1);
-          opacity: 1;
-        }
       }
 
       /* Responsive Design */
@@ -377,16 +322,6 @@
           width: 40px;
           height: 40px;
         }
-
-        .add-to-cart-confirmation {
-          bottom: 20px;
-          right: 20px;
-          left: 20px;
-          min-width: auto;
-          max-width: none;
-          padding: 16px 20px;
-          font-size: 15px;
-        }
       }
 
       @media (max-width: 480px) {
@@ -423,7 +358,7 @@
         }
 
         .search-input {
-          font-size: 16px;
+          font-size: 16px; /* Prevent zoom on iOS */
           padding: 10px 45px 10px 15px;
         }
 
@@ -446,24 +381,14 @@
           padding: 15px;
         }
 
+        /* Adjust cart and user icons for touch */
         .cart-btn,
         .login-btn {
           padding: 12px 8px;
         }
-
-        .add-to-cart-confirmation {
-          bottom: 15px;
-          right: 15px;
-          left: 15px;
-          padding: 14px 18px;
-          font-size: 14px;
-        }
-
-        .add-to-cart-confirmation i {
-          font-size: 18px;
-        }
       }
 
+      /* Extra small screens */
       @media (max-width: 360px) {
         .logo {
           flex-direction: column;
@@ -488,6 +413,7 @@
         }
       }
 
+      /* Landscape orientation for mobile */
       @media (max-width: 768px) and (orientation: landscape) {
         .logo-section {
           padding: 10px 0;
@@ -506,6 +432,7 @@
         }
       }
 
+      /* High DPI displays */
       @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
         .logo-icon {
           image-rendering: -webkit-optimize-contrast;
@@ -513,6 +440,7 @@
         }
       }
 
+      /* Accessibility improvements */
       @media (prefers-reduced-motion: reduce) {
         * {
           animation-duration: 0.01ms !important;
@@ -528,7 +456,7 @@
       <div class="logo-section">
         <div class="logo">
           <img
-            src="/Media/logo.png"
+            src="https://via.placeholder.com/50x50/d4af37/ffffff?text=LOGO"
             alt="SK Handicraft Logo"
             class="logo-icon"
           />
@@ -545,17 +473,13 @@
 
           <ul class="nav-menu">
             <li class="nav-item">
-              <a href="/index.html" class="nav-link">HOME</a>
+              <a href="#" class="nav-link">SHOP</a>
             </li>
             <li class="nav-item">
-              <a href="/other-unimportant-files/about.html" class="nav-link"
-                >ABOUT</a
-              >
+              <a href="#" class="nav-link">ABOUT</a>
             </li>
             <li class="nav-item">
-              <a href="/other-unimportant-files/contact.html" class="nav-link"
-                >CONTACT US</a
-              >
+              <a href="#" class="nav-link">CONTACT US</a>
             </li>
           </ul>
 
@@ -565,7 +489,6 @@
                 type="text"
                 class="search-input"
                 placeholder="Search here ..."
-                id="navbar-search"
               />
               <button class="search-btn" aria-label="Search">
                 <svg class="search-icon" viewBox="0 0 24 24">
@@ -577,7 +500,7 @@
             </div>
 
             <div class="user-actions">
-              <a href="login.html" class="login-btn">
+              <a href="#" class="login-btn">
                 <svg class="user-icon" viewBox="0 0 24 24">
                   <path
                     d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
@@ -587,18 +510,14 @@
               </a>
 
               <div class="cart-container">
-                <a
-                  href="/checkoutCart/productcart.html"
-                  class="cart-btn"
-                  aria-label="Shopping cart"
-                >
+                <button class="cart-btn" aria-label="Shopping cart">
                   <svg class="cart-icon" viewBox="0 0 24 24">
                     <path
                       d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03L21.7 4H5.21l-.94-2H1zm16 16c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
                     />
                   </svg>
-                </a>
-                <span class="cart-count badge">0</span>
+                </button>
+                <span class="cart-count">0</span>
               </div>
             </div>
           </div>
@@ -606,101 +525,6 @@
       </nav>
     </div>
 
-    <div class="page-container">
-      <!-- Breadcrumb -->
-      <div class="product-breadcrumb">
-        <a href="/index.html">Home</a> > <span>Products</span>
-      </div>
-
-      <!-- Page Header -->
-      <div class="page-header">
-        <h1 class="page-title">Our Handcrafted Collection</h1>
-        <p class="page-subtitle">
-          Discover unique, handmade treasures crafted with love and care
-        </p>
-      </div>
-
-      <!-- Filter and Sort Controls -->
-      <div class="controls-section">
-        <div class="filter-controls">
-          <div class="filter-group">
-            <label for="category-filter">Category:</label>
-            <select id="category-filter">
-              <option value="">All Categories</option>
-              <option value="pottery">Pottery</option>
-              <option value="textiles">Textiles</option>
-              <option value="jewelry">Jewelry</option>
-              <option value="woodwork">Woodwork</option>
-              <option value="art">Art & Decor</option>
-            </select>
-          </div>
-
-          <div class="filter-group">
-            <label for="price-filter">Price Range:</label>
-            <select id="price-filter">
-              <option value="">All Prices</option>
-              <option value="0-25">$0 - $25</option>
-              <option value="25-50">$25 - $50</option>
-              <option value="50-100">$50 - $100</option>
-              <option value="100+">$100+</option>
-            </select>
-          </div>
-
-          <div class="filter-group">
-            <label for="sort-filter">Sort by:</label>
-            <select id="sort-filter">
-              <option value="featured">Featured</option>
-              <option value="name-asc">Name (A-Z)</option>
-              <option value="name-desc">Name (Z-A)</option>
-              <option value="price-asc">Price (Low to High)</option>
-              <option value="price-desc">Price (High to Low)</option>
-              <option value="newest">Newest First</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="search-filters">
-          <div class="search-box">
-            <input
-              type="text"
-              id="product-search"
-              placeholder="Search products..."
-            />
-            <i class="fa-solid fa-search"></i>
-          </div>
-        </div>
-      </div>
-
-      <!-- Products Section -->
-      <div class="products-section">
-        <div class="products-count">
-          <span id="products-count">Loading products...</span>
-        </div>
-
-        <!-- Products Grid -->
-        <div class="products-grid" id="products-grid">
-          <!-- Loading state initially -->
-          <div class="loading-container">
-            <div class="loading-spinner"></div>
-          </div>
-        </div>
-
-        <!-- Pagination -->
-        <div class="pagination" id="pagination" style="display: none">
-          <button id="prev-page" disabled>
-            <i class="fa-solid fa-chevron-left"></i> Previous
-          </button>
-          <div id="page-numbers"></div>
-          <button id="next-page">
-            Next <i class="fa-solid fa-chevron-right"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="/Landing-page/cart.js"></script>
-    <script src="product.js"></script>
     <script>
       // Mobile menu functionality
       const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
@@ -736,125 +560,55 @@
         }
       });
 
-      // Search functionality for navbar
-      const navbarSearchInput = document.querySelector("#navbar-search");
+      // Search functionality
+      const searchInput = document.querySelector(".search-input");
       const searchBtn = document.querySelector(".search-btn");
+      const cartBtn = document.querySelector(".cart-btn");
+      const cartCount = document.querySelector(".cart-count");
 
       searchBtn.addEventListener("click", function () {
-        const searchTerm = navbarSearchInput.value.trim();
+        const searchTerm = searchInput.value.trim();
         if (searchTerm) {
-          // You can integrate this with your existing product search
-          const productSearchInput = document.querySelector("#product-search");
-          if (productSearchInput) {
-            productSearchInput.value = searchTerm;
-            // Trigger product search if you have that functionality
-            productSearchInput.dispatchEvent(new Event("input"));
-          }
+          alert(`Searching for: ${searchTerm}`);
         }
       });
 
-      navbarSearchInput.addEventListener("keypress", function (e) {
+      searchInput.addEventListener("keypress", function (e) {
         if (e.key === "Enter") {
           const searchTerm = this.value.trim();
           if (searchTerm) {
-            const productSearchInput =
-              document.querySelector("#product-search");
-            if (productSearchInput) {
-              productSearchInput.value = searchTerm;
-              productSearchInput.dispatchEvent(new Event("input"));
-            }
+            alert(`Searching for: ${searchTerm}`);
           }
         }
       });
 
-      // ============= ADD TO CART NOTIFICATION FUNCTIONALITY =============
+      // Cart functionality
+      cartBtn.addEventListener("click", function () {
+        let currentCount = parseInt(cartCount.textContent);
+        currentCount++;
+        cartCount.textContent = currentCount;
 
-      // Function to show add to cart notification
-      function showAddToCartNotification(productName) {
-        // Remove any existing notification
-        const existingNotification = document.querySelector(
-          ".add-to-cart-confirmation"
-        );
-        if (existingNotification) {
-          existingNotification.remove();
-        }
-
-        // Create new notification
-        const notification = document.createElement("div");
-        notification.className = "add-to-cart-confirmation";
-        notification.innerHTML = `
-          <i class="fa-solid fa-check-circle"></i>
-          <span>${productName || "Product"} added to cart!</span>
-        `;
-
-        document.body.appendChild(notification);
-
-        // Remove notification after 3 seconds
+        // Add a little animation
+        this.style.transform = "scale(1.1)";
         setTimeout(() => {
-          if (notification && notification.parentNode) {
-            notification.remove();
-          }
-        }, 3000);
-      }
-
-      // Make the function globally available
-      window.showAddToCartNotification = showAddToCartNotification;
-
-      // Add event listener for all "Add to Cart" buttons on the page
-      document.addEventListener("click", function (e) {
-        // Check if clicked element is an "Add to Cart" button
-        if (
-          e.target.classList.contains("add-to-cart-btn-card") ||
-          e.target.closest(".add-to-cart-btn-card")
-        ) {
-          // Get the product card element
-          const productCard = e.target.closest(".product-card");
-          let productName = "Product";
-
-          if (productCard) {
-            // Try to get product name from the card
-            const productNameElement =
-              productCard.querySelector("h3 a") ||
-              productCard.querySelector("h3");
-            if (productNameElement) {
-              productName = productNameElement.textContent.trim();
-            }
-          }
-
-          // Show the notification
-          showAddToCartNotification(productName);
-
-          // Optional: Update cart count
-          const cartCountElement = document.querySelector(".cart-count");
-          if (cartCountElement) {
-            const currentCount = parseInt(cartCountElement.textContent) || 0;
-            cartCountElement.textContent = currentCount + 1;
-
-            // Show cart count if it was hidden
-            if (currentCount === 0) {
-              cartCountElement.style.display = "flex";
-            }
-          }
-        }
+          this.style.transform = "scale(1)";
+        }, 200);
       });
 
-      // Alternative function to manually trigger notification (for external JS files)
-      window.triggerAddToCartNotification = function (productName) {
-        showAddToCartNotification(productName);
+      // Navigation links
+      const navLinks = document.querySelectorAll(".nav-link");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          alert(`Navigating to: ${this.textContent}`);
 
-        // Update cart count
-        const cartCountElement = document.querySelector(".cart-count");
-        if (cartCountElement) {
-          const currentCount = parseInt(cartCountElement.textContent) || 0;
-          cartCountElement.textContent = currentCount + 1;
-
-          if (currentCount === 0) {
-            cartCountElement.style.display = "flex";
+          // Close mobile menu after navigation
+          if (window.innerWidth <= 768) {
+            navMenu.classList.remove("active");
+            mobileMenuToggle.innerHTML = "☰";
           }
-        }
-      };
-
-      // ============= END ADD TO CART NOTIFICATION FUNCTIONALITY =============
+        });
+      });
 
       // Prevent iOS zoom on input focus
       if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
